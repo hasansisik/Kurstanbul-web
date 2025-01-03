@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { Button } from "@/components/ui/button";
+import { GalleryVerticalEnd } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -13,22 +14,25 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password-input";
 import { useRouter } from "next/navigation";
 
 const formSchema = z
   .object({
-    passwordToken: z.string(),
-    newPassword: z.string().min(8, "Şifre en az 8 karakter olmalıdır"),
+    password: z
+      .string()
+      .min(8, "Şifre en az 8 karakter olmalıdır")
+      .refine((password) => {
+        return /^(?=.*[!@#$%^&*.])(?=.*[A-Z]).*$/.test(password);
+      }, "Şifre en az bir büyük harf ve bir özel karakter içermelidir"),
     passwordConfirm: z.string(),
   })
   .superRefine((data, ctx) => {
-    if (data.newPassword !== data.passwordConfirm) {
+    if (data.password !== data.passwordConfirm) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         path: ["passwordConfirm"],
-        message: "Parolalar uyuşmuyor",
+        message: "Şifreler eşleşmiyor",
       });
     }
   });
@@ -38,98 +42,95 @@ export default function ResetPasswordPage() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      passwordToken: "",
-      newPassword: "",
+      password: "",
       passwordConfirm: "",
     },
   });
 
   const handleSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log("Giriş Başarılı!", data);
-    router.push("/dashboard");
+    console.log("Şifre başarıyla değiştirildi!", data);
+    router.push("/auth/login");
   };
 
   return (
-    <>
-      <div className="flex flex-col space-y-2 text-center">
-        <h1 className="text-2xl font-bold tracking-tight">Şifremi Sıfırla</h1>
-        <p className="text-sm text-muted-foreground">
-          Şifremi sıfırlamak için bilgileri girin.
-        </p>
-      </div>
-      <div>
-        <Form {...form}>
-          <form
-            className="flex flex-col gap-4 pb-5"
-            onSubmit={form.handleSubmit(handleSubmit)}
-          >
-            {/* passwordToken Input */}
-            <FormField
-              control={form.control}
-              name="passwordToken"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Doğrulama Kodu</FormLabel>
-                  <FormControl>
-                    <Input placeholder="1234" {...field} />
-                  </FormControl>
-                  <FormDescription>Doğrulama Kodu girin</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            {/* Password Input */}
-            <FormField
-              control={form.control}
-              name="newPassword"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Yeni Şifre</FormLabel>
-                  <FormControl>
-                    <PasswordInput placeholder="••••••••" {...field} />
-                  </FormControl>
-                  <FormDescription>Şifrenizi girin</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            {/* Password Confirm Input */}
-            <FormField
-              control={form.control}
-              name="passwordConfirm"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Confirm Password</FormLabel>
-                  <FormControl>
-                    <PasswordInput placeholder="••••••••" {...field} />
-                  </FormControl>
-                  <FormDescription>Şifrenizi tekrar girin</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button type="submit">Şifremi Sıfırla</Button>
-          </form>
-        </Form>
-        <div className="flex items-center justify-center pb-5">
-          <p className="text-sm">
-            Hesabınız yok mu?{" "}
-            <a href="/auth/register" className="text-primary font-bold">
-              Kayıt Ol
-            </a>
-          </p>
+    <div className="grid min-h-svh lg:grid-cols-2">
+      <div className="flex flex-col gap-4 p-6 md:p-10">
+        <div className="flex justify-center gap-2 md:justify-start">
+          <a href="#" className="flex items-center gap-2 font-medium">
+            <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
+              <GalleryVerticalEnd className="size-4" />
+            </div>
+            Acme Inc.
+          </a>
         </div>
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t" />
-          </div>
-          <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-background px-2 text-muted-foreground">
-              VEYA devam etmek için
-            </span>
+        <div className="flex flex-1 items-center justify-center">
+          <div className="w-full max-w-md space-y-6">
+            <div className="flex flex-col space-y-2 text-center">
+              <h1 className="text-2xl font-bold tracking-tight">Şifre Sıfırlama</h1>
+              <p className="text-sm text-muted-foreground">
+                Yeni şifrenizi belirleyin
+              </p>
+            </div>
+            <Form {...form}>
+              <form
+                className="flex flex-col gap-4 pb-5"
+                onSubmit={form.handleSubmit(handleSubmit)}
+              >
+                {/* Password Input */}
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Yeni Şifre</FormLabel>
+                      <FormControl>
+                        <PasswordInput placeholder="●●●●●●●●" {...field} />
+                      </FormControl>
+                      <FormDescription>
+                        Yeni şifrenizi girin
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                {/* Password Confirm Input */}
+                <FormField
+                  control={form.control}
+                  name="passwordConfirm"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Şifre Tekrar</FormLabel>
+                      <FormControl>
+                        <PasswordInput placeholder="●●●●●●●●" {...field} />
+                      </FormControl>
+                      <FormDescription>
+                        Yeni şifrenizi tekrar girin
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button type="submit">Şifreyi Değiştir</Button>
+              </form>
+            </Form>
+            <div className="flex items-center justify-center pb-5">
+              <p className="text-sm">
+                Giriş yapmak için{" "}
+                <a href="/auth/login" className="text-primary font-bold">
+                  tıklayın
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </>
+      <div className="relative hidden bg-muted lg:block">
+        <img
+          src="/images/auth-b-3.png"
+          alt="Image"
+          className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+        />
+      </div>
+    </div>
   );
 }
