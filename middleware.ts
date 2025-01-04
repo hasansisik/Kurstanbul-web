@@ -8,10 +8,7 @@ import authConfig from './auth.config';
 const { auth } = NextAuth(authConfig);
 
 export default auth((req) => {
-  if (!req.auth) {
-    const url = req.url.replace(req.nextUrl.pathname, '/');
-    return Response.redirect(url);
-  }
+  // Auth kontrolü devre dışı bırakıldı
 });
 
 export const config = { matcher: ['/dashboard/:path*'] };
