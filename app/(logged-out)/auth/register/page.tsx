@@ -1,7 +1,12 @@
 "use client";
-import React, { useEffect, useState } from "react"; 
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { CalendarIcon, PersonStandingIcon, GalleryVerticalEnd } from "lucide-react";
+import {
+  CalendarIcon,
+  PersonStandingIcon,
+  GalleryVerticalEnd,
+  Car,
+} from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -34,34 +39,17 @@ import { format } from "date-fns";
 import { PasswordInput } from "@/components/ui/password-input";
 import { useRouter } from "next/navigation";
 
-const accountTypeSchema = z
-  .object({
-    accountType: z.enum(["personal", "company"]),
-    companyName: z.string().optional(),
-    numberOfEmployees: z.coerce.number().optional(),
-    acceptTerms: z.boolean({
+const accountTypeSchema = z.object({
+  accountType: z.enum(["personal", "company"]),
+  companyName: z.string().optional(),
+  companyAdress: z.string().optional(),
+  companyNumber: z.string().optional(),
+  acceptTerms: z
+    .boolean({
       required_error: "You must accept the terms and conditions",
-    }).refine((checked)=> checked, "You must accept the terms and conditions"),
-  })
-  .superRefine((data, ctx) => {
-    if (data.accountType === "company" && !data.companyName) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        path: ["companyName"],
-        message: "Company account is not supported yet",
-      });
-    }
-    if (
-      data.accountType === "company" &&
-      (!data.numberOfEmployees || data.numberOfEmployees < 1)
-    ) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        path: ["numberOfEmployees"],
-        message: "Number of employees is not",
-      });
-    }
-  });
+    })
+    .refine((checked) => checked, "You must accept the terms and conditions"),
+});
 
 const passwordSchema = z
   .object({
@@ -86,15 +74,6 @@ const passwordSchema = z
 
 const baseSchema = z.object({
   email: z.string().email(),
-  dob: z.date().refine((date) => {
-    const today = new Date();
-    const eighteedYearsAgo = new Date(
-      today.getFullYear() - 18,
-      today.getMonth(),
-      today.getDate()
-    );
-    return date <= eighteedYearsAgo;
-  }, "You must be 18 years old"),
 });
 
 const formSchema = baseSchema.and(accountTypeSchema).and(passwordSchema);
@@ -108,6 +87,8 @@ export default function RegisterPage() {
       password: "",
       passwordConfirm: "",
       companyName: "",
+      companyAdress: "",
+      companyNumber: "",
     },
   });
 
@@ -125,10 +106,10 @@ export default function RegisterPage() {
       <div className="flex flex-col gap-4 p-6 md:p-10">
         <div className="flex justify-center gap-2 md:justify-start">
           <a href="#" className="flex items-center gap-2 font-medium">
-            <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
-              <GalleryVerticalEnd className="size-4" />
+            <div className="flex h-6 w-6 items-center justify-center rounded-md bg-purple text-primary-foreground">
+              <Car className="size-4" />
             </div>
-            Acme Inc.
+            Kurstanbul.
           </a>
         </div>
         <div className="flex flex-1 items-center justify-center">
@@ -158,106 +139,44 @@ export default function RegisterPage() {
                     </FormItem>
                   )}
                 />
-                {/* Account Type */}
+                {/* Company Name */}
                 <FormField
                   control={form.control}
-                  name="accountType"
+                  name="companyName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Hesap Türü</FormLabel>
+                      <FormLabel>Sürücü Kursu İsmi</FormLabel>
                       <FormControl>
-                        <Select name="accountType" onValueChange={field.onChange}>
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select Account" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="personal">Personal</SelectItem>
-                            <SelectItem value="company">Company</SelectItem>
-                          </SelectContent>
-                        </Select>
+                        <Input placeholder="Sürücü Kursu İsmi" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-                {/* Company */}
-                {accountType === "company" && (
-                  <>
-                    {/* Company Name */}
-                    <FormField
-                      control={form.control}
-                      name="companyName"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Company Name</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Company name" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    {/* Company Employees Number */}
-                    <FormField
-                      control={form.control}
-                      name="numberOfEmployees"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Employees</FormLabel>
-                          <FormControl>
-                            <Input
-                              type="number"
-                              min={0}
-                              placeholder="Employees"
-                              {...field}
-                              value={field.value ?? ""}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </>
-                )}
-                {/* Company Date of Birth */}
+                {/* Company Adress */}
                 <FormField
                   control={form.control}
-                  name="dob"
+                  name="companyAdress"
                   render={({ field }) => (
-                    <FormItem className="flex flex-col pt-2">
-                      <FormLabel>Date of Birth</FormLabel>
-                      <Popover>
-                        <PopoverTrigger asChild>
-                          <FormControl>
-                            <Button
-                              variant="outline"
-                              className="normal-case flex justify-between pr-1"
-                            >
-                              {!!field.value ? (
-                                format(field.value, "PPP")
-                              ) : (
-                                <span>Pick a date</span>
-                              )}
-                              <CalendarIcon size={20} />
-                            </Button>
-                          </FormControl>
-                        </PopoverTrigger>
-                        <PopoverContent align="start" className="w-auto p-0">
-                          <Calendar
-                            mode="single"
-                            defaultMonth={field.value}
-                            selected={field.value}
-                            onSelect={field.onChange}
-                            fixedWeeks
-                            weekStartsOn={1}
-                            fromDate={dobFromDate}
-                            toDate={new Date()}
-                            captionLayout="dropdown-buttons"
-                          />
-                        </PopoverContent>
-                      </Popover>
+                    <FormItem>
+                      <FormLabel>Sürücü Kursu Adres</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Sürücü Kursu Adresi" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                {/* Company Adress */}
+                <FormField
+                  control={form.control}
+                  name="companyNumber"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Sürücü Kursu Adres</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Telefon Numarası" {...field} />
+                      </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -268,7 +187,7 @@ export default function RegisterPage() {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Password</FormLabel>
+                      <FormLabel>Şifre</FormLabel>
                       <FormControl>
                         <PasswordInput placeholder="●●●●●●●●" {...field} />
                       </FormControl>
@@ -282,7 +201,7 @@ export default function RegisterPage() {
                   name="passwordConfirm"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Confirm Password</FormLabel>
+                      <FormLabel>Şifre Tekrar</FormLabel>
                       <FormControl>
                         <PasswordInput placeholder="●●●●●●●●" {...field} />
                       </FormControl>
@@ -303,15 +222,15 @@ export default function RegisterPage() {
                             onCheckedChange={field.onChange}
                           />
                         </FormControl>
-                        <FormLabel>I accept the terms and conditions</FormLabel>
+                        <FormLabel>Sürücü Kursu Anlaşması</FormLabel>
                       </div>
                       <FormDescription>
-                        By creating an account you agree to our {""}
+                        Kullanım Koşulları {""}
                         <Link
                           href="/terms"
                           className="text-primary hover:underline"
                         >
-                          Terms & Conditions
+                          Şartlar ve Koşullar{" "}
                         </Link>
                       </FormDescription>
                       <FormMessage />
@@ -321,23 +240,13 @@ export default function RegisterPage() {
                 <Button type="submit">Kayıt Ol</Button>
               </form>
             </Form>
-            <div className="flex items-center justify-center pb-5">
+            <div className="flex items-center justify-center">
               <p className="text-sm">
                 Zaten hesabınız var mı?{" "}
                 <a href="/auth/login" className="text-primary font-bold">
                   Giriş Yap
                 </a>
               </p>
-            </div>
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t" />
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-background px-2 text-muted-foreground">
-                  VEYA devam etmek için
-                </span>
-              </div>
             </div>
           </div>
         </div>

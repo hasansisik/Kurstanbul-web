@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { GalleryVerticalEnd } from "lucide-react";
+import { GalleryVerticalEnd,Car } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -55,12 +55,12 @@ export default function ResetPasswordPage() {
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
       <div className="flex flex-col gap-4 p-6 md:p-10">
-        <div className="flex justify-center gap-2 md:justify-start">
+      <div className="flex justify-center gap-2 md:justify-start">
           <a href="#" className="flex items-center gap-2 font-medium">
-            <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
-              <GalleryVerticalEnd className="size-4" />
+            <div className="flex h-6 w-6 items-center justify-center rounded-md bg-purple text-primary-foreground">
+              <Car className="size-4" />
             </div>
-            Acme Inc.
+            Kurstanbul.
           </a>
         </div>
         <div className="flex flex-1 items-center justify-center">

@@ -13,24 +13,12 @@ export const metadata: Metadata = {
 
 const sidebarNavItems = [
   {
-    title: "Profile",
+    title: "Hesap",
     href: "/dashboard/settings",
   },
   {
-    title: "Account",
-    href: "/dashboard/settings/account",
-  },
-  {
-    title: "Appearance",
+    title: "Görünüm",
     href: "/dashboard/settings/appearance",
-  },
-  {
-    title: "Notifications",
-    href: "/dashboard/settings/notifications",
-  },
-  {
-    title: "Display",
-    href: "/dashboard/settings/display",
   },
 ]
 
@@ -49,8 +37,8 @@ export default function SettingsLayout({ children }: SettingsLayoutProps) {
       <div className="space-y-4">
         <Breadcrumbs items={breadcrumbItems} />
         <Heading
-          title={`Settings`}
-          description="Manage employees (Server side table functionalities.)"
+          title={`Ayarlar`}
+          description="Ayarlar sayfasından tüm tercihlerinizi yönetebilir ve platformumuzu ihtiyaçlarınıza göre özelleştirebilirsiniz."
         />
         <Separator />
         <div className="flex flex-col space-y-8 lg:flex-row lg:space-x-12 lg:space-y-0">

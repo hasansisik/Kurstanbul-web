@@ -61,7 +61,7 @@ export function AppearanceForm() {
           name="font"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Font</FormLabel>
+              <FormLabel>Font Büyüklüğü</FormLabel>
               <div className="relative w-max">
                 <FormControl>
                   <select
@@ -71,15 +71,15 @@ export function AppearanceForm() {
                     )}
                     {...field}
                   >
-                    <option value="inter">Inter</option>
-                    <option value="manrope">Manrope</option>
-                    <option value="system">System</option>
+                    <option value="inter">Küçük</option>
+                    <option value="manrope">Orta</option>
+                    <option value="system">Büyük</option>
                   </select>
                 </FormControl>
                 <ChevronDownIcon className="absolute right-3 top-2.5 h-4 w-4 opacity-50" />
               </div>
               <FormDescription>
-                Set the font you want to use in the dashboard.
+              Metin boyutunu değiştirerek içeriği daha rahat okuyabilir, ekranınızda en uygun görünümü elde edebilirsiniz.
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -90,9 +90,9 @@ export function AppearanceForm() {
           name="theme"
           render={({ field }) => (
             <FormItem className="space-y-1">
-              <FormLabel>Theme</FormLabel>
+              <FormLabel>Tema</FormLabel>
               <FormDescription>
-                Select the theme for the dashboard.
+                Tema görünümünü seçebilirsiniz.
               </FormDescription>
               <FormMessage />
               <RadioGroup
@@ -122,7 +122,7 @@ export function AppearanceForm() {
                       </div>
                     </div>
                     <span className="block w-full p-2 text-center font-normal">
-                      Light
+                      Aydınlık
                     </span>
                   </FormLabel>
                 </FormItem>
@@ -148,7 +148,7 @@ export function AppearanceForm() {
                       </div>
                     </div>
                     <span className="block w-full p-2 text-center font-normal">
-                      Dark
+                      Koyu
                     </span>
                   </FormLabel>
                 </FormItem>
@@ -157,7 +157,7 @@ export function AppearanceForm() {
           )}
         />
 
-        <Button type="submit">Update preferences</Button>
+        <Button type="submit">Güncelle</Button>
       </form>
     </Form>
   )

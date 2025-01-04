@@ -2,14 +2,15 @@
 
 import * as React from "react"
 import {
-  BookOpen,
-  Bot,
-  Command,
+  Smartphone,
   Frame,
-  GalleryVerticalEnd,
   Map,
   PieChart,
   Settings2,
+  Car,
+  Home,
+  User,
+  Store
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -33,124 +34,133 @@ const data = {
   },
   teams: [
     {
-      name: "Acme Inc",
-      logo: GalleryVerticalEnd,
-      plan: "Enterprise",
-    },
-    {
-      name: "Acme Corp.",
-      logo: BookOpen,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
-    },
+      name: "Aktif Görsel",
+      logo: Car,
+      plan: "999942101",
+    }
   ],
   navMain: [
     {
-      title: "User",
+      title: "Kurstanbul Mobil",
       url: "/dashboard/user",
-      icon: BookOpen,
+      icon: Smartphone,
       isActive: true,
       items: [
         {
-          title: "History",
+          title: "Kursum",
           url: "/dashboard/user",
         },
         {
-          title: "Starred",
+          title: "Personellerim",
           url: "/dashboard/user",
         },
         {
-          title: "Settings",
+          title: "Değerlendirmelerim",
           url: "/dashboard/user",
+        },
+        {
+          title:"Mevcut Ehliyet Sınıfları",
+          url:"/dashboard"
+        },
+        {
+          title: "Uygulama Ders Kayıt",
+          url: "/dashboard/kanban",
         },
       ],
     },
     {
-      title: "Kanban",
+      title: "Kurum İşlemleri",
       url: "/dashboard/kanban",
-      icon: Bot,
+      icon: Home,
       items: [
         {
-          title: "Genesis",
+          title: "Kurum Bilgisi",
           url: "/dashboard/kanban",
         },
         {
-          title: "Explorer",
+          title: "Kurum Araç",
           url: "/dashboard/kanban",
         },
         {
-          title: "Quantum",
+          title: "Kurum Derslik",
           url: "/dashboard/kanban",
         },
+        {
+          title: "Kurum Personelleri",
+          url: "/dashboard/kanban",
+        },
+
       ],
     },
     {
-      title: "Employee",
+      title: "Kurum Aday Kayıt",
       url: "/dashboard/employee",
-      icon: BookOpen,
+      icon: User,
       items: [
         {
-          title: "Introduction",
+          title: "Aday Dönem Kayıt",
           url: "/dashboard/employee",
         },
         {
-          title: "Get Started",
+          title: "Aday Evrak Kayıt",
           url: "/dashboard/employee",
         },
         {
-          title: "Tutorials",
+          title: "Aday Listeleme/Kontrol",
           url: "/dashboard/employee",
         },
         {
-          title: "Changelog",
+          title: "Aday Durum Görüntüleme",
           url: "/dashboard/employee",
         },
       ],
     },
     {
-      title: "Settings",
+      title: "Ayarlar",
       url: "/dashboard/settings",
       icon: Settings2,
       items: [
         {
-          title: "General",
+          title: "Profil",
           url: "/dashboard/settings",
         },
         {
-          title: "Team",
-          url: "/dashboard/settings",
+          title: "Hesap",
+          url: "/dashboard/settings/account",
         },
         {
-          title: "Billing",
-          url: "/dashboard/settings",
+          title: "Görünüm",
+          url: "/dashboard/settings/appearance",
         },
         {
-          title: "Limits",
-          url: "/dashboard/settings",
+          title: "Bildirimler",
+          url: "/dashboard/settings/notifications",
         },
       ],
     },
   ],
   projects: [
     {
-      name: "Design Engineering",
+      name: "Aday Dönem Kayıt",
+      url: "/dashboard/profile",
+      icon: Map,
+    },
+    {
+      name: "MEBBİS Aktarım",
       url: "/dashboard/profile",
       icon: Frame,
     },
     {
-      name: "Sales & Marketing",
+      name: "Mağaza",
       url: "/dashboard/profile",
-      icon: PieChart,
+      icon: Store,
     },
     {
-      name: "Travel",
+      name: "Kurum Bilgisi",
       url: "/dashboard/profile",
       icon: Map,
     },
+   
   ],
 }
 

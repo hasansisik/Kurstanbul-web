@@ -5,10 +5,9 @@ export default function SettingsAppearancePage() {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-medium">Appearance</h3>
+        <h3 className="text-lg font-medium">Görünüm</h3>
         <p className="text-sm text-muted-foreground">
-          Customize the appearance of the app. Automatically switch between day
-          and night themes.
+        Tema,Karanlık veya aydınlık tema seçin,metinleri daha rahat okuyabilmek için yazı boyutunu ayarlayın.
         </p>
       </div>
       <Separator />
