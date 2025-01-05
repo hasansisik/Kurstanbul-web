@@ -10,8 +10,8 @@ import { auth } from '@/auth';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'kurstanbul E-ticaret Paneli',
-  description: 'E-ticaret denetim ve yönetim platformu',
+  title: 'Kurstanbul',
+  description: 'Sürücü Kurstu Kayıt Platformu',
 };
 
 export default async function RootLayout({
