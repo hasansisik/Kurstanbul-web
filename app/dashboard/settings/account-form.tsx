@@ -62,6 +62,14 @@ const accountFormSchema = z.object({
   language: z.string({
     required_error: "Please select a language.",
   }),
+  password: z
+    .string()
+    .min(8, { message: "Şifre en az 8 karakter olmalıdır." })
+    .optional(),
+  passwordConfirm: z
+    .string()
+    .min(8, { message: "Şifre en az 8 karakter olmalıdır." })
+    .optional(),
 })
 
 type AccountFormValues = z.infer<typeof accountFormSchema>
