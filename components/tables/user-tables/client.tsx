@@ -26,7 +26,7 @@ interface ProductsClientProps {
   data: User[];
 }
 
-export const UserClient: React.FC<ProductsClientProps> = ({ data }) => {
+export const CourseClient: React.FC<ProductsClientProps> = ({ data }) => {
   const router = useRouter();
 
   return (

@@ -70,24 +70,24 @@ const data = {
     },
     {
       title: "Kurum İşlemleri",
-      url: "/dashboard/kanban",
+      url: "/dashboard/courseProcess",
       icon: Home,
       items: [
         {
           title: "Kurum Bilgisi",
-          url: "/dashboard/kanban",
+          url: "/dashboard/courseProcess",
         },
         {
           title: "Kurum Araç",
-          url: "/dashboard/kanban",
+          url: "/dashboard/courseProcess",
         },
         {
           title: "Kurum Derslik",
-          url: "/dashboard/kanban",
+          url: "/dashboard/courseProcess",
         },
         {
           title: "Kurum Personelleri",
-          url: "/dashboard/kanban",
+          url: "/dashboard/courseProcess",
         },
 
       ],
