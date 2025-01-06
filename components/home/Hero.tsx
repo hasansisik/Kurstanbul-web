@@ -15,7 +15,7 @@ export const Hero = () => {
       </div>
       <div className="flex justify-center mt-8 ">
       <div className="inline-flex relative">
-      <h1 className='text-7xl sm:text-9xl font-bold tracking-tightner text-center inline-flex'>Eldora UI <br/> is more</h1>
+      <h1 className='text-6xl sm:text-9xl font-bold tracking-tightner text-center inline-flex'>Kurstanbul <br/> KOS</h1>
       <motion.div className='absolute right-[478px] top-[108px] hidden sm:inline'
       drag
       dragSnapToOrigin
@@ -32,16 +32,14 @@ export const Hero = () => {
       </div>
       </div>
       <div className="flex justify-center">
-      <p className='text-xl text-center mt-8 max-w-md'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit quod dicta, nisi autem dignissimos consequatur? Unde saepe eius nam. Minima at quaerat non quae qui consequatur hic nam neque earum.</p>
+      <p className='text-xl text-center mt-8 max-w-md'>Kurstanbul KOS, sürücü kursları için geliştirilmiş bir otomasyon sistemidir; kursiyer takibi, mağaza yönetimi ve Kurstanbul aracılığıyla gelen müşterileri ekleme gibi özellikler sunar.</p>
       </div>
       <div className="flex justify-center mt-8">
-      <button className='bg-white text-black py-3 px-5 rounded-lg font-medium'>Get for free</button>
+      <button className='bg-white text-black py-3 px-5 rounded-lg font-medium'>Ücretsiz Başlayın</button>
       </div>
 
 
     </div>
-    
-
     </div>
   )
 };

@@ -5,24 +5,22 @@ import MinusIcon from "../../public/icons/minus.svg";
 import {motion , AnimatePresence} from 'framer-motion';
 const items = [
   {
-    question: "What payment methods do you accept?",
+    question: "Kurstanbul KOS nedir?",
+    answer:"Kurstanbul KOS, sürücü kursları için geliştirilmiş bir yönetim sistemidir. Kurs kayıtları, öğrenci takibi, eğitmen atamaları, ödeme yönetimi ve sınav takibi gibi işlemleri dijital ortamda kolayca yönetmenizi sağlar."},
+  {
+    question: "Kurstanbul KOS'a nasıl üye olabilirim?",
     answer:
-      "We accept all major credit cards, PayPal, and various other payment methods depending on your location. Please contact our support team for more information on accepted payment methods in your region.",
+      "Kurstanbul KOS’a üye olmak için web sitesi üzerinden kayıt işlemi yapabilirsiniz. Kayıt işlemi sonrasında, sürücü kursunuzu sisteme ekleyebilir ve yönetmeye başlayabilirsiniz.",
   },
   {
-    question: "How does the pricing work for teams?",
+    question: "Kurstanbul KOS, sürücü kurslarına hangi özellikleri sunuyor?",
     answer:
-      "Our pricing is per user, per month. This means you only pay for the number of team members you have on your account. Discounts are available for larger teams and annual subscriptions.",
+      "Kurstanbul KOS, öğrenci kayıtları, sınav takibi, ödeme yönetimi, eğitim materyalleri paylaşımı, eğitmen atamaları, sertifika düzenleme ve raporlama gibi özellikler sunar.",
   },
   {
-    question: "Can I change my plan later?",
+    question: "Sistem, öğrencilerin eğitim ilerlemesini nasıl takip eder?",
     answer:
-      "Yes, you can upgrade or downgrade your plan at any time. Changes to your plan will be prorated and reflected in your next billing cycle.",
-  },
-  {
-    question: "Is my data secure?",
-    answer:
-      "Security is our top priority. We use state-of-the-art encryption and comply with the best industry practices to ensure that your data is stored securely and accessed only by authorized users.",
+      "Kurstanbul KOS, öğrencilerin eğitim süreçlerini takip etmek için ders geçmişi, sınav sonuçları ve başarı durumu gibi bilgileri kaydeder. Her öğrenciye özel bir profil oluşturularak eğitim ilerlemesi izlenebilir.",
   },
 ];
 
@@ -58,7 +56,7 @@ export const FAQs = () => {
     <div className="bg-black text-white py-[72px] sm:py-24 bg-gradient-to-b from-[#5D2CA8] to-black ">
       <div className="container">
         <h2 className="text-5xl sm:text-6xl sm:w-[648px] mx-auto text-center text-white tracking-tighter">
-          Frequently Asked Questions
+        Sıkça Sorulan Sorular
         </h2>
         <div className="mt-12 max-w-[648px] mx-auto">
          {items.map(({question, answer}) => (

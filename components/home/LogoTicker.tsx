@@ -21,8 +21,7 @@ export const LogoTicker = () => {
     <div className="bg-black text-white py-[72px] sm:py-24">
       <div className="container">
         <h2 className="text-lg text-center text-white/70 mb-16">
-          Trusted by world&apos;s most innovative teams
-        </h2>
+        KOS'u Tercih Eden Sürücü Kursları</h2>
         <LogoCarousel />
       </div>
     </div>

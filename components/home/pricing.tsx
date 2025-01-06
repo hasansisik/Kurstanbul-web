@@ -20,7 +20,7 @@ export function PricingTab(props: PricingTabProps) {
       <div className="relative flex flex-col h-full p-6 rounded-2xl bg-black border border-white/30 shadow shadow-black/80">
         {props.popular && (
           <div className="absolute top-0 right-0 mr-6 -mt-4">
-            <div className="inline-flex items-center text-xs font-semibold py-1.5 px-3 bg-emerald-500 text-white rounded-full shadow-sm shadow-slate-950/5">Most Popular</div>
+            <div className="inline-flex items-center text-xs font-semibold py-1.5 px-3 bg-emerald-500 text-white rounded-full shadow-sm shadow-slate-950/5">En Çok Tercih Edilen</div>
           </div>
         )}
         <div className="mb-5">
@@ -28,14 +28,14 @@ export function PricingTab(props: PricingTabProps) {
           <div className="inline-flex items-baseline mb-2">
             <span className="text-white/70 font-bold text-3xl">$</span>
             <span className="text-white/50 font-bold text-4xl">{props.yearly ? props.price.yearly : props.price.monthly}</span>
-            <span className="text-white/70 font-medium">/mo</span>
+            <span className="text-white/70 font-medium">/ay</span>
           </div>
           <div className="text-sm text-white/70 mb-5">{props.planDescription}</div>
           <a className="w-full inline-flex justify-center whitespace-nowrap rounded-lg bg-[#5D2CA8] px-3.5 py-2.5 text-sm font-medium text-white shadow-sm shadow-indigo-950/10 hover:bg-[#5D2CA2] focus-visible:outline-none focus-visible:ring focus-visible:ring-slate-600 transition-colors duration-150" href="#0">
-            Purchase Plan
+            Planı Seç
           </a>
         </div>
-        <div className="text-slate-200 font-medium mb-3">Includes:</div>
+        <div className="text-slate-200 font-medium mb-3">Özellikler:</div>
         <ul className="text-slate-400 text-sm space-y-3 grow">
           {props.features.map((feature, index) => {
             return (
@@ -65,8 +65,8 @@ export default function PricingTable() {
           <span className="absolute inset-0 m-1 pointer-events-none" aria-hidden="true">
             <span className={`absolute inset-0 w-1/2 bg-[#5D2CA8] rounded-full shadow-sm shadow-[#5D2CA8] transform transition-transform duration-150 ease-in-out ${isAnnual ? 'translate-x-0' : 'translate-x-full'}`}></span>
           </span>
-          <button className={`relative flex-1 text-sm font-medium h-8 rounded-full focus-visible:outline-none focus-visible:ring focus-visible:ring-slate-600 transition-colors duration-150 ease-in-out ${isAnnual ? 'text-white/70' : ' text-white'}`} onClick={() => setIsAnnual(true)} aria-pressed={isAnnual}>Yearly <span className={`${isAnnual ? 'text-indigo-200' : 'text-slate-400 dark:text-slate-500'}`}>-20%</span></button>
-          <button className={`relative flex-1 text-sm font-medium h-8 rounded-full focus-visible:outline-none focus-visible:ring focus-visible:ring-slate-600 transition-colors duration-150 ease-in-out ${isAnnual ? 'text-white/70' : ' text-white'}`} onClick={() => setIsAnnual(false)} aria-pressed={isAnnual}>Monthly</button>
+          <button className={`relative flex-1 text-sm font-medium h-8 rounded-full focus-visible:outline-none focus-visible:ring focus-visible:ring-slate-600 transition-colors duration-150 ease-in-out ${isAnnual ? 'text-white/70' : ' text-white'}`} onClick={() => setIsAnnual(true)} aria-pressed={isAnnual}>Yıllık <span className={`${isAnnual ? 'text-indigo-200' : 'text-slate-400 dark:text-slate-500'}`}>-20%</span></button>
+          <button className={`relative flex-1 text-sm font-medium h-8 rounded-full focus-visible:outline-none focus-visible:ring focus-visible:ring-slate-600 transition-colors duration-150 ease-in-out ${isAnnual ? 'text-white/70' : ' text-white'}`} onClick={() => setIsAnnual(false)} aria-pressed={isAnnual}>Aylık</button>
         </div>
       </div>
 
@@ -75,7 +75,7 @@ export default function PricingTable() {
         {/* Pricing tab 1 */}
         <PricingTab
           yearly={isAnnual}
-          planName="Essential"
+          planName="KOS Temel"
           price={{ yearly: 29, monthly: 35 }}
           planDescription="There are many variations available, but the majority have suffered."
           features={[
@@ -89,7 +89,7 @@ export default function PricingTable() {
         <PricingTab
           yearly={isAnnual}
           popular={true}
-          planName="Perform"
+          planName="KOS Premium"
           price={{ yearly: 49, monthly: 55 }}
           planDescription="There are many variations available, but the majority have suffered."
           features={[
@@ -103,7 +103,7 @@ export default function PricingTable() {
         {/* Pricing tab 3 */}
         <PricingTab
           yearly={isAnnual}
-          planName="Enterprise"
+          planName="KOS Elite"
           price={{ yearly: 79, monthly: 85 }}
           planDescription="There are many variations available, but the majority have suffered."
           features={[

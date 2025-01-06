@@ -21,34 +21,22 @@ export const Navbar = () => {
                 href="#"
                 className="text-opacity-60 text-white hover:text-opacity-100 transition"
               >
-                About
+                Hakkımızda
               </a>
               <a
                 href="#"
                 className="text-opacity-60 text-white hover:text-opacity-100 transition"
               >
-                Features
+                SSS
               </a>
               <a
                 href="#"
                 className="text-opacity-60 text-white hover:text-opacity-100 transition"
               >
-                Updates
-              </a>
-              <a
-                href="#"
-                className="text-opacity-60 text-white hover:text-opacity-100 transition"
-              >
-                Help
-              </a>
-              <a
-                href="#"
-                className="text-opacity-60 text-white hover:text-opacity-100 transition"
-              >
-                Customers
+                Politikalar
               </a>
               <button className="bg-white py-2 px-4 rounded-lg text-black">
-                Get for free
+                Kurstanbul KOS
               </button>
             </nav>
           </div>
