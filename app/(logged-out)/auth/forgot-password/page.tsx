@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { GalleryVerticalEnd,Car } from "lucide-react";
+import { Car } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -16,29 +16,55 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/redux/hook";
+import { forgotPassword } from "@/redux/actions/courseActions";
+import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
-  email: z.string().email("Geçerli bir email adresi girin"),
+  courseEmail: z.string().email("Geçerli bir email adresi girin"),
 });
 
 export default function ForgotPasswordPage() {
   const router = useRouter();
+  const dispatch = useAppDispatch();
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
+      courseEmail: "",
     },
   });
 
-  const handleSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log("Şifre sıfırlama emaili gönderildi!", data);
-    router.push("/auth/login");
+  const handleSubmit = async (data: z.infer<typeof formSchema>) => {
+    try {
+      const actionResult = await dispatch(forgotPassword(data.courseEmail));
+
+      if (forgotPassword.fulfilled.match(actionResult)) {
+        toast({
+          title: "Başarılı",
+          description: "Şifre sıfırlama emaili gönderildi.",
+        });
+        router.push(`/auth/reset-password?courseEmail=${encodeURIComponent(data.courseEmail)}`);
+      } else {
+        toast({
+          title: "Başarısız",
+          description: actionResult.payload as string,
+          variant: "destructive",
+        });
+      }
+    } catch (error: any) {
+      toast({
+        title: "Başarısız",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
   };
 
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
       <div className="flex flex-col gap-4 p-6 md:p-10">
-      <div className="flex justify-center gap-2 md:justify-start">
+        <div className="flex justify-center gap-2 md:justify-start">
           <a href="#" className="flex items-center gap-2 font-medium">
             <div className="flex h-6 w-6 items-center justify-center rounded-md bg-purple text-primary-foreground">
               <Car className="size-4" />
@@ -62,7 +88,7 @@ export default function ForgotPasswordPage() {
                 {/* Email Input */}
                 <FormField
                   control={form.control}
-                  name="email"
+                  name="courseEmail"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Email</FormLabel>

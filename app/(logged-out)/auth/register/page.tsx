@@ -141,7 +141,7 @@ export default function RegisterPage() {
           </a>
         </div>
         <div className="flex flex-1 items-center justify-center">
-          <div className="w-full max-w-md space-y-6">
+          <div className="w-full max-w-md ">
             <div className="flex flex-col space-y-2 text-center">
               <h1 className="text-2xl font-bold tracking-tight">Kayıt Ol</h1>
               <p className="text-sm text-muted-foreground">
@@ -244,12 +244,10 @@ export default function RegisterPage() {
                           />
                         </FormControl>
                         <FormLabel>Sürücü Kursu Anlaşması</FormLabel>
-                      </div>
-                      <FormDescription>
-                        <Link href="/terms" className="text-primary hover:underline">
+                        <Link href="/terms" className="text-primary underline">
                           Şartlar ve Koşullar
                         </Link>
-                      </FormDescription>
+                      </div>
                       <FormMessage />
                     </FormItem>
                   )}

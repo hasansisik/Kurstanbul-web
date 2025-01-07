@@ -17,6 +17,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password-input";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/redux/hook";
+import { login } from "@/redux/actions/courseActions";
+import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -31,6 +34,8 @@ const formSchema = z.object({
 
 export default function LoginPage() {
   const router = useRouter();
+  const dispatch = useAppDispatch();
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,9 +44,35 @@ export default function LoginPage() {
     },
   });
 
-  const handleSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log("Giriş Başarılı!", data);
-    router.push("/dashboard");
+  const handleSubmit = async (data: z.infer<typeof formSchema>) => {
+    try {
+      const loginData = {
+        courseEmail: data.email,
+        password: data.password,
+      };
+
+      const actionResult = await dispatch(login(loginData));
+
+      if (login.fulfilled.match(actionResult)) {
+        toast({
+          title: "Giriş Başarılı",
+          description: "Dashboard sayfasına yönlendiriliyorsunuz.",
+        });
+        router.push("/dashboard");
+      } else {
+        toast({
+          title: "Giriş Başarısız",
+          description: actionResult.payload as string,
+          variant: "destructive",
+        });
+      }
+    } catch (error: any) {
+      toast({
+        title: "Giriş Başarısız",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -89,7 +120,15 @@ export default function LoginPage() {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Şifre</FormLabel>
+                      <div className="flex items-center">
+                        <FormLabel>Şifre</FormLabel>
+                        <a
+                          href="/auth/forgot-password"
+                          className="ml-auto text-sm underline-offset-4 hover:underline"
+                        >
+                         Şifremi Unuttum?
+                        </a>
+                      </div>
                       <FormControl>
                         <PasswordInput placeholder="●●●●●●●●" {...field} />
                       </FormControl>
