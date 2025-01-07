@@ -1,4 +1,4 @@
-export const server: string ="http://localhost:5003/v1";
+export const server: string ="https://kurstanbul-kos-bf0d67428b62.herokuapp.com/v1";
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 

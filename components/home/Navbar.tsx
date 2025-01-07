@@ -35,7 +35,10 @@ export const Navbar = () => {
               >
                 Politikalar
               </a>
-              <button className="bg-white py-2 px-4 rounded-lg text-black">
+              <button 
+                className="bg-white py-2 px-4 rounded-lg text-black"
+                onClick={() => window.location.href = '/auth/login'}
+              >
                 Kurstanbul KOS
               </button>
             </nav>
