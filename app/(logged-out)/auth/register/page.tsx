@@ -1,12 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
+
 import { Button } from "@/components/ui/button";
-import {
-  CalendarIcon,
-  PersonStandingIcon,
-  GalleryVerticalEnd,
-  Car,
-} from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -21,45 +15,23 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectValue,
-  SelectTrigger,
-} from "@/components/ui/select";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Calendar } from "@/components/ui/calendar";
-import { format } from "date-fns";
 import { PasswordInput } from "@/components/ui/password-input";
+import { useEffect, useState } from "react";
+import { Car } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
-
-const accountTypeSchema = z.object({
-  accountType: z.enum(["personal", "company"]),
-  companyName: z.string().optional(),
-  companyAdress: z.string().optional(),
-  companyNumber: z.string().optional(),
-  acceptTerms: z
-    .boolean({
-      required_error: "You must accept the terms and conditions",
-    })
-    .refine((checked) => checked, "You must accept the terms and conditions"),
-});
+import { useAppDispatch } from "@/redux/hook";
+import { register } from "@/redux/actions/courseActions";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const passwordSchema = z
   .object({
     password: z
       .string()
-      .min(8, "Password must be at least 8 characters")
+      .min(8, "Şifre en az 8 karakter olmalıdır")
       .refine((password) => {
-        // At least one uppercase letter and one special character
         return /^(?=.*[!@#$%^&*.])(?=.*[A-Z]).*$/.test(password);
-      }, "Password must contain at least one uppercase letter and one special character"),
+      }, "Şifre en az bir büyük harf ve bir özel karakter içermelidir"),
     passwordConfirm: z.string(),
   })
   .superRefine((data, ctx) => {
@@ -67,39 +39,95 @@ const passwordSchema = z
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         path: ["passwordConfirm"],
-        message: "Passwords do not match",
+        message: "Parolalar uyuşmuyor",
       });
     }
   });
 
 const baseSchema = z.object({
-  email: z.string().email(),
+  courseEmail: z.string().email("Geçerli bir email girin"),
+  companyName: z.string().min(1, "Sürücü kursu ismi zorunludur"),
+  companyAdress: z.string().min(1, "Sürücü kursu adresi zorunludur"),
+  companyNumber: z.string().min(1, "Sürücü kursu telefonu zorunludur"),
+  acceptTerms: z
+    .boolean()
+    .refine((checked) => checked, "Kullanım koşullarını kabul etmelisiniz"),
 });
 
-const formSchema = baseSchema.and(accountTypeSchema).and(passwordSchema);
+const formSchema = baseSchema.and(passwordSchema);
 
 export default function RegisterPage() {
+  const { toast } = useToast();
+  const dispatch = useAppDispatch();
   const router = useRouter();
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    const className = document.body.className;
+    setIsDarkMode(className.includes("dark"));
+
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === "class") {
+          const className = document.body.className;
+          setIsDarkMode(className.includes("dark"));
+        }
+      });
+    });
+
+    observer.observe(document.body, {
+      attributes: true,
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
-      password: "",
-      passwordConfirm: "",
+      courseEmail: "",
       companyName: "",
       companyAdress: "",
       companyNumber: "",
+      password: "",
+      passwordConfirm: "",
+      acceptTerms: false,
     },
   });
 
-  const handleSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log("Giriş Başarılı!", data);
-    router.push("/dashboard");
-  };
+  const handleSubmit = async (data: z.infer<typeof formSchema>) => {
+    try {
+      const registerData = {
+        courseName: data.companyName,
+        courseEmail: data.courseEmail,
+        courseAdress: data.companyAdress,
+        courseTel: data.companyNumber,
+        password: data.password,
+      };
 
-  const accountType = form.watch("accountType");
-  const dobFromDate = new Date();
-  dobFromDate.setFullYear(dobFromDate.getFullYear() - 100);
+      const actionResult = await dispatch(register(registerData));
+      
+      if (register.fulfilled.match(actionResult)) {
+        toast({
+          title: "Kayıt Başarılı",
+          description: "Email doğrulama sayfasına yönlendiriliyorsunuz.",
+        });
+        router.push(`/auth/verify-email?courseEmail=${encodeURIComponent(data.courseEmail)}`);
+      } else {
+        toast({
+          title: "Kayıt Başarısız",
+          description: actionResult.payload as string,
+          variant: "destructive",
+        });
+      }
+    } catch (error: any) {
+      toast({
+        title: "Kayıt Başarısız",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
+  };
 
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
@@ -125,10 +153,9 @@ export default function RegisterPage() {
                 className="flex flex-col gap-4 pb-5"
                 onSubmit={form.handleSubmit(handleSubmit)}
               >
-                {/* Email Input */}
                 <FormField
                   control={form.control}
-                  name="email"
+                  name="courseEmail"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Email</FormLabel>
@@ -139,7 +166,6 @@ export default function RegisterPage() {
                     </FormItem>
                   )}
                 />
-                {/* Company Name */}
                 <FormField
                   control={form.control}
                   name="companyName"
@@ -153,7 +179,6 @@ export default function RegisterPage() {
                     </FormItem>
                   )}
                 />
-                {/* Company Adress */}
                 <FormField
                   control={form.control}
                   name="companyAdress"
@@ -167,13 +192,12 @@ export default function RegisterPage() {
                     </FormItem>
                   )}
                 />
-                {/* Company Adress */}
                 <FormField
                   control={form.control}
                   name="companyNumber"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Sürücü Kursu Adres</FormLabel>
+                      <FormLabel>Sürücü Kursu Telefon</FormLabel>
                       <FormControl>
                         <Input placeholder="Telefon Numarası" {...field} />
                       </FormControl>
@@ -181,7 +205,6 @@ export default function RegisterPage() {
                     </FormItem>
                   )}
                 />
-                {/* Password Input */}
                 <FormField
                   control={form.control}
                   name="password"
@@ -195,7 +218,6 @@ export default function RegisterPage() {
                     </FormItem>
                   )}
                 />
-                {/* Password Confirm Input */}
                 <FormField
                   control={form.control}
                   name="passwordConfirm"
@@ -209,7 +231,6 @@ export default function RegisterPage() {
                     </FormItem>
                   )}
                 />
-                {/* Accept Terms Input */}
                 <FormField
                   control={form.control}
                   name="acceptTerms"
@@ -225,12 +246,8 @@ export default function RegisterPage() {
                         <FormLabel>Sürücü Kursu Anlaşması</FormLabel>
                       </div>
                       <FormDescription>
-                        Kullanım Koşulları {""}
-                        <Link
-                          href="/terms"
-                          className="text-primary hover:underline"
-                        >
-                          Şartlar ve Koşullar{" "}
+                        <Link href="/terms" className="text-primary hover:underline">
+                          Şartlar ve Koşullar
                         </Link>
                       </FormDescription>
                       <FormMessage />
@@ -243,9 +260,9 @@ export default function RegisterPage() {
             <div className="flex items-center justify-center">
               <p className="text-sm">
                 Zaten hesabınız var mı?{" "}
-                <a href="/auth/login" className="text-primary font-bold">
+                <Link href="/auth/login" className="text-primary font-bold">
                   Giriş Yap
-                </a>
+                </Link>
               </p>
             </div>
           </div>
