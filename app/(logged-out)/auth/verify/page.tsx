@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { GalleryVerticalEnd,Car } from "lucide-react";
+import { Car } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -21,7 +21,10 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useAppDispatch } from "@/redux/hook";
+import { verifyEmail } from "@/redux/actions/courseActions";
+import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   verificationCode: z.string(),
@@ -29,14 +32,44 @@ const formSchema = z.object({
 
 export default function AuthenticationPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const courseEmail = searchParams.get("courseEmail");
+  const dispatch = useAppDispatch();
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: { verificationCode: "" },
   });
 
-  const handleSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log("Giriş Başarılı!", data);
-    router.push("/dashboard");
+  const handleSubmit = async (data: z.infer<typeof formSchema>) => {
+    try {
+      const verifyData = {
+        courseEmail: courseEmail!,
+        verificationCode: parseInt(data.verificationCode),
+      };
+
+      const actionResult = await dispatch(verifyEmail(verifyData));
+
+      if (verifyEmail.fulfilled.match(actionResult)) {
+        toast({
+          title: "Doğrulama Başarılı",
+          description: "Giriş sayfasına yönlendiriliyorsunuz.",
+        });
+        router.push("/auth/login");
+      } else {
+        toast({
+          title: "Doğrulama Başarısız",
+          description: actionResult.payload as string,
+          variant: "destructive",
+        });
+      }
+    } catch (error: any) {
+      toast({
+        title: "Doğrulama Başarısız",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
   };
 
   return (

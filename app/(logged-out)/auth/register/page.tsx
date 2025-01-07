@@ -112,7 +112,7 @@ export default function RegisterPage() {
           title: "Kayıt Başarılı",
           description: "Email doğrulama sayfasına yönlendiriliyorsunuz.",
         });
-        router.push(`/auth/verify-email?courseEmail=${encodeURIComponent(data.courseEmail)}`);
+        router.push(`/auth/verify?courseEmail=${encodeURIComponent(data.courseEmail)}`);
       } else {
         toast({
           title: "Kayıt Başarısız",
