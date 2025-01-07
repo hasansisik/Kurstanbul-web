@@ -13,7 +13,7 @@ export const Pricing = () => {
           İhtiyacınıza en uygun planı seçin ve hizmetlerimizden en iyi şekilde yararlanın. Her plan, size özel avantajlar sunar.
           </p>
         </div>
-        <div className="flex flex-col items-center justify-center sm:flex-row gap-4 px-24 py-[72px] sm:py-24  ">
+        <div className="flex flex-col items-center justify-center sm:flex-row gap-4 py-[72px] sm:py-24  ">
           <PricingTable />
         </div>
       </div>

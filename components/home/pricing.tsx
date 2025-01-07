@@ -58,7 +58,6 @@ export default function PricingTable() {
 
   return (
     <div>
-
       {/* Pricing toggle */}
       <div className="flex justify-center max-w-[14rem] m-auto mb-8 lg:mb-16">
         <div className="relative flex w-full p-1 bg-black rounded-full">
@@ -70,7 +69,7 @@ export default function PricingTable() {
         </div>
       </div>
 
-      <div className="max-w-sm mx-auto grid gap-6 lg:grid-cols-3 items-start lg:max-w-none">
+      <div className="w-full mx-auto grid gap-6 md:grid-cols-1 lg:grid-cols-3 items-start lg:max-w-none">
 
         {/* Pricing tab 1 */}
         <PricingTab
