@@ -3,9 +3,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 const logos = [
-  "https://res.cloudinary.com/dl2adjye7/image/upload/v1716817722/Amazon_icon.svg_a4qmtg.png",
-  "https://res.cloudinary.com/dl2adjye7/image/upload/v1716800282/Apple_logo_black.svg_seeetv.png",
-  "https://res.cloudinary.com/dl2adjye7/image/upload/v1716800359/WISE.L-b3d3de3c_rexehe.png"
+  "https://firebasestorage.googleapis.com/v0/b/kurstanbul-22329.appspot.com/o/man.png?alt=media&token=bd04b298-e4fc-4266-82da-14e80e3da646",
+  "https://firebasestorage.googleapis.com/v0/b/kurstanbul-22329.appspot.com/o/KOS.png?alt=media&token=c079d104-e60f-4ac6-8abc-07cf77ca1498",
+  "https://firebasestorage.googleapis.com/v0/b/kurstanbul-22329.appspot.com/o/dealership.png?alt=media&token=e9595779-6403-4cf4-998c-614d101e5982"
 ];
 
 const lineWidth = 80; 
@@ -15,7 +15,7 @@ const LogoBeam = () => {
   return (
     <div className="flex items-center justify-center min-h-52">
       <div className="relative flex items-center">
-        <div className="bg-[#000] border border-white/30  rounded-2xl flex items-center justify-center w-14 h-14 p-4">
+        <div className="bg-[#000] border border-white/30  rounded-2xl flex items-center justify-center w-14 h-14 p-2">
           <img src={logos[0]} alt="Logo 1" className="filter invert brightness-0" />
         </div>
         <div className="relative" style={{ width: `${lineWidth}px`, height: `${lineHeight}px`, backgroundColor: '#FFFFFF', overflow: 'hidden' }}>
@@ -32,7 +32,7 @@ const LogoBeam = () => {
             style={{ willChange: 'transform' }}
           />
         </div>
-        <div className="relative bg-black border-2 border-white/70 rounded-2xl flex items-center justify-center w-16 h-16 p-4 overflow-hidden shadow-[0_0_15px_5px_#dbe0e2]">
+        <div className="relative bg-black border-2 border-white/70 rounded-2xl flex items-center justify-center w-16 h-16 p-2 overflow-hidden shadow-[0_0_15px_5px_#dbe0e2]">
           <img src={logos[1]} alt="Logo 2" className="filter invert brightness-0" />
           <motion.div
             className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-30"
@@ -61,7 +61,7 @@ const LogoBeam = () => {
             style={{ willChange: 'transform' }}
           />
         </div>
-        <div className="bg-black border border-white/30 rounded-2xl flex items-center justify-center w-14 h-14 p-4">
+        <div className="bg-black border border-white/30 rounded-2xl flex items-center justify-center w-14 h-14 p-2">
           <img src={logos[2]} alt="Logo 3" className="filter invert brightness-0" />
         </div>
       </div>
@@ -167,8 +167,8 @@ const AWSIcon = () => {
 
       
       <div className="text-left p-6 mt-4">
-        <h1 className="text-white text-2xl font-bold mb-2">AWS Integration</h1>
-        <p className="text-gray-400 text-lg">integrate AWS and use seamlessly with us.</p>
+        <h1 className="text-white text-2xl font-bold mb-2">Kurslarınız İçin Yeni Bir Başlangıç</h1>
+        <p className="text-gray-400 text-lg">Kurstanbul sayesinde eğitimlerinizi profesyonel bir şekilde sunabilir ve kursiyerlerinizi artırabilirsiniz. Platformumuz, eğitiminizi daha erişilebilir kılar.</p>
       </div>
     </div>
   );
@@ -211,10 +211,10 @@ const BentoBox1 = () => {
           <div className="flex flex-col justify-between h-full">
             <div className="mb-4 px-6 mt-6">
               <div className="flex justify-between items-center mb-6 pb-2">
-                <h2 className="text-white/70 text-xl">Sales Data</h2>
+                <h2 className="text-white/70 text-xl">Satış Verisi</h2>
                 <div className="flex items-center">
                   <div className="h-1 bg-black w-8 rounded-lg"></div>
-                  <span className="ml-2 text-white/70 text-sm">Growth</span>
+                  <span className="ml-2 text-white/70 text-sm">Kursiyer</span>
                 </div>
               </div>
               <div ref={chartRef} className="relative w-full mt-12" style={{ height: chartHeight }}>
@@ -266,8 +266,8 @@ const BentoBox1 = () => {
               </div>
             </div>
             <div className="text-left p-6 mt-4">
-              <h1 className="text-white text-2xl font-bold mb-2">Incredible Growth</h1>
-              <p className="text-white/70 text-lg">Fly through your tasks with rapid-fire keyboard shortcuts for everything. Literally everything.</p>
+              <h1 className="text-white text-2xl font-bold mb-2">Eğitimde Yeni Dönem: Kurstanbul ile Daha Fazla Kursiyer</h1>
+              <p className="text-white/70 text-lg">Eğitimlerinizi dijital ortamda etkili bir şekilde tanıtmanıza olanak tanır. Modern araçlarımızla kurslarınız daha görünür hale gelir, daha fazla kursiyere ulaşarak büyüme sağlar.</p>
             </div>
           </div>
         </CardWithEffect>
@@ -276,8 +276,8 @@ const BentoBox1 = () => {
             <div className="flex flex-col justify-center h-full">
               <LogoBeam />
               <div className="text-left p-6">
-                <h1 className="text-white text-2xl font-bold mb-2">Multiple Technologies</h1>
-                <p className="text-white/70 text-lg">Fly through your tasks with rapid-fire keyboard shortcuts for everything. Literally everything.</p>
+                <h1 className="text-white text-2xl font-bold mb-2">Sürücü Kursu ve Kursiyer Arasındaki Köprü</h1>
+                <p className="text-white/70 text-lg">Kurstanbul, sürücü kurslarıyla kursiyerleri bir araya getiren güçlü bir bağ kurar. Doğru kitleye ulaşarak kursiyerlerinizi artırabilir, eğitimlerinizi kolayca yönetebilirsiniz.</p>
               </div>
             </div>
           </CardWithEffect>
