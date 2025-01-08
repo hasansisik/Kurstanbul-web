@@ -1,10 +1,10 @@
 // redux/store.ts
 import { configureStore } from "@reduxjs/toolkit";
-import { courseReducer } from "./reducers/courseReducer";
+import  companyReducer  from "./reducers/companyReducer";
 
 const store = configureStore({
   reducer: {
-    user: courseReducer,
+    company: companyReducer,
   },
 });
 

@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/input-otp";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAppDispatch } from "@/redux/hook";
-import { verifyEmail } from "@/redux/actions/courseActions";
+import { verifyEmail } from "@/redux/actions/companyActions";
 import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({

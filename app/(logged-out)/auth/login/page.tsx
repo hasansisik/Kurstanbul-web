@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password-input";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/redux/hook";
-import { login } from "@/redux/actions/courseActions";
+import { login } from "@/redux/actions/companyActions";
 import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({

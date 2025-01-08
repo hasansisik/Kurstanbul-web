@@ -21,8 +21,17 @@ import { Car } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/redux/hook";
-import { register } from "@/redux/actions/courseActions";
+import { register } from "@/redux/actions/companyActions";
 import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { TERMS_AND_CONDITIONS } from "@/constants/terms";
 
 const passwordSchema = z
   .object({
@@ -49,6 +58,7 @@ const baseSchema = z.object({
   companyName: z.string().min(1, "Sürücü kursu ismi zorunludur"),
   companyAdress: z.string().min(1, "Sürücü kursu adresi zorunludur"),
   companyNumber: z.string().min(1, "Sürücü kursu telefonu zorunludur"),
+  courseCode: z.string().min(1, "Kurs kodu zorunludur"),
   acceptTerms: z
     .boolean()
     .refine((checked) => checked, "Kullanım koşullarını kabul etmelisiniz"),
@@ -61,6 +71,8 @@ export default function RegisterPage() {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [showTermsDialog, setShowTermsDialog] = useState(false);
+  const [tempAcceptance, setTempAcceptance] = useState(false);
 
   useEffect(() => {
     const className = document.body.className;
@@ -89,6 +101,7 @@ export default function RegisterPage() {
       companyName: "",
       companyAdress: "",
       companyNumber: "",
+      courseCode: "",
       password: "",
       passwordConfirm: "",
       acceptTerms: false,
@@ -102,17 +115,20 @@ export default function RegisterPage() {
         courseEmail: data.courseEmail,
         courseAdress: data.companyAdress,
         courseTel: data.companyNumber,
+        courseCode: data.courseCode,
         password: data.password,
       };
 
       const actionResult = await dispatch(register(registerData));
-      
+
       if (register.fulfilled.match(actionResult)) {
         toast({
           title: "Kayıt Başarılı",
           description: "Email doğrulama sayfasına yönlendiriliyorsunuz.",
         });
-        router.push(`/auth/verify?courseEmail=${encodeURIComponent(data.courseEmail)}`);
+        router.push(
+          `/auth/verify?courseEmail=${encodeURIComponent(data.courseEmail)}`
+        );
       } else {
         toast({
           title: "Kayıt Başarısız",
@@ -127,6 +143,29 @@ export default function RegisterPage() {
         variant: "destructive",
       });
     }
+  };
+
+  const handleTermsClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowTermsDialog(true);
+  };
+
+  const handleDialogClose = () => {
+    setShowTermsDialog(false);
+    if (!tempAcceptance) {
+      form.setValue('acceptTerms', false);
+    }
+  };
+
+  const handleAcceptTerms = () => {
+    setTempAcceptance(true);
+    form.setValue('acceptTerms', true);
+    setShowTermsDialog(false);
+  };
+
+  const handleTermsLinkClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowTermsDialog(true);
   };
 
   return (
@@ -192,19 +231,35 @@ export default function RegisterPage() {
                     </FormItem>
                   )}
                 />
-                <FormField
-                  control={form.control}
-                  name="companyNumber"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Sürücü Kursu Telefon</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Telefon Numarası" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                {/* Telefon ve Kurs Kodu yan yana */}
+                <div className="flex gap-4">
+                  <FormField
+                    control={form.control}
+                    name="companyNumber"
+                    render={({ field }) => (
+                      <FormItem className="flex-1">
+                        <FormLabel>Sürücü Kursu Telefon</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Telefon Numarası" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="courseCode"
+                    render={({ field }) => (
+                      <FormItem className="flex-1">
+                        <FormLabel>Kurs Kodu</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Kurs Kodu" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
                 <FormField
                   control={form.control}
                   name="password"
@@ -240,13 +295,23 @@ export default function RegisterPage() {
                         <FormControl>
                           <Checkbox
                             checked={field.value}
-                            onCheckedChange={field.onChange}
+                            onCheckedChange={() => {
+                              if (!field.value) {
+                                setShowTermsDialog(true);
+                              } else {
+                                field.onChange(false);
+                              }
+                            }}
                           />
                         </FormControl>
                         <FormLabel>Sürücü Kursu Anlaşması</FormLabel>
-                        <Link href="/terms" className="text-primary underline">
+                        <a 
+                          href="#" 
+                          onClick={handleTermsLinkClick} 
+                          className="text-sm font-bold underline"
+                        >
                           Şartlar ve Koşullar
-                        </Link>
+                        </a>
                       </div>
                       <FormMessage />
                     </FormItem>
@@ -273,6 +338,25 @@ export default function RegisterPage() {
           className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
         />
       </div>
+      <Dialog open={showTermsDialog} onOpenChange={handleDialogClose}>
+        <DialogContent className="max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>{TERMS_AND_CONDITIONS.title}</DialogTitle>
+            <DialogDescription>
+              Lütfen aşağıdaki şartları ve koşulları okuyunuz.
+            </DialogDescription>
+          </DialogHeader>
+          {TERMS_AND_CONDITIONS.content}
+          <DialogFooter>
+            <Button variant="outline" onClick={handleDialogClose}>
+              Vazgeç
+            </Button>
+            <Button onClick={handleAcceptTerms}>
+              Okudum, Anladım ve Onaylıyorum
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

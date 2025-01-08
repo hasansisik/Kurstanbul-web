@@ -9,18 +9,18 @@ import {
   forgotPassword,
   resetPassword,
   editProfile,
-} from "../actions/courseActions";
+} from "../actions/companyActions";
 
-interface UserState {
-  user: any;
+interface CompanyState {
+  company: any;
   loading: boolean;
   error: string | null;
   isAuthenticated?: boolean;
   message?: string;
 }
 
-const initialState: UserState = {
-  user: {},
+const initialState: CompanyState = {
+  company: {},
   loading: false,
   error: null,
 };
@@ -34,7 +34,7 @@ export const courseReducer = createReducer(initialState, (builder) => {
     .addCase(register.fulfilled, (state, action) => {
       state.loading = false;
       state.isAuthenticated = false;
-      state.user = action.payload;
+      state.company = action.payload;
     })
     .addCase(register.rejected, (state, action) => {
       state.loading = false;
@@ -47,20 +47,20 @@ export const courseReducer = createReducer(initialState, (builder) => {
     .addCase(login.fulfilled, (state, action) => {
       state.loading = false;
       state.isAuthenticated = true;
-      state.user = action.payload;
+      state.company = action.payload;
     })
     .addCase(login.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload as string;
     })
-    // Load User
+    // Load company
     .addCase(loadUser.pending, (state) => {
       state.loading = true;
     })
     .addCase(loadUser.fulfilled, (state, action) => {
       state.loading = false;
       state.isAuthenticated = true;
-      state.user = action.payload;
+      state.company = action.payload;
     })
     .addCase(loadUser.rejected, (state, action) => {
       state.loading = false;
@@ -73,7 +73,7 @@ export const courseReducer = createReducer(initialState, (builder) => {
     .addCase(logout.fulfilled, (state, action) => {
       state.loading = false;
       state.isAuthenticated = false;
-      state.user = null;
+      state.company = null;
       state.message = action.payload;
     })
     .addCase(logout.rejected, (state, action) => {
@@ -135,7 +135,7 @@ export const courseReducer = createReducer(initialState, (builder) => {
     .addCase(editProfile.fulfilled, (state, action) => {
       state.loading = false;
       state.message = action.payload.message;
-      state.user = action.payload.company;
+      state.company = action.payload.company;
     })
     .addCase(editProfile.rejected, (state, action) => {
       state.loading = false;

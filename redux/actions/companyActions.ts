@@ -6,6 +6,7 @@ export interface RegisterPayload {
   courseName: string;
   courseEmail: string;
   courseAdress: string;
+  courseCode: string;
   courseTel: string;
   password: string;
 }
@@ -66,13 +67,16 @@ export const loadUser = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const token = localStorage.getItem("accessToken");
-      const { data } = await axios.get(`${server}/company/profile`, {
+      console.log("token",token);
+      const { data } = await axios.get(`${server}/company/me`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log("data",data)
       return data.company;
     } catch (error: any) {
+      console.log("err1",error)
       return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
