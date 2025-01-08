@@ -39,7 +39,7 @@ export const register = createAsyncThunk(
   "user/register",
   async (payload: RegisterPayload, thunkAPI) => {
     try {
-      const { data } = await axios.post(`${server}/course/register`, payload);
+      const { data } = await axios.post(`${server}/company/register`, payload);
       localStorage.setItem("accessToken", data.course.token);
       return data.course;
     } catch (error: any) {
@@ -52,7 +52,7 @@ export const login = createAsyncThunk(
   "user/login",
   async (payload: LoginPayload, thunkAPI) => {
     try {
-      const { data } = await axios.post(`${server}/course/login`, payload);
+      const { data } = await axios.post(`${server}/company/login`, payload);
       localStorage.setItem("accessToken", data.course.token);
       return data.course;
     } catch (error: any) {
@@ -66,7 +66,7 @@ export const loadUser = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const token = localStorage.getItem("accessToken");
-      const { data } = await axios.get(`${server}/course/profile`, {
+      const { data } = await axios.get(`${server}/company/profile`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -81,7 +81,7 @@ export const loadUser = createAsyncThunk(
 export const logout = createAsyncThunk("user/logout", async (_, thunkAPI) => {
   try {
     const token = localStorage.getItem("accessToken");
-    const { data } = await axios.get(`${server}/course/logout`, {
+    const { data } = await axios.get(`${server}/company/logout`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -97,7 +97,7 @@ export const verifyEmail = createAsyncThunk(
   "user/verifyEmail",
   async (payload: VerifyEmailPayload, thunkAPI) => {
     try {
-      const { data } = await axios.post(`${server}/course/verify-email`, payload);
+      const { data } = await axios.post(`${server}/company/verify-email`, payload);
       return data.message;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(
@@ -113,7 +113,7 @@ export const againEmail = createAsyncThunk(
   "user/againEmail",
   async (courseEmail: string, thunkAPI) => {
     try {
-      const { data } = await axios.post(`${server}/course/again-email`, { courseEmail });
+      const { data } = await axios.post(`${server}/company/again-email`, { courseEmail });
       return data.message;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(
@@ -129,7 +129,7 @@ export const forgotPassword = createAsyncThunk(
   "user/forgotPassword",
   async (courseEmail: string, thunkAPI) => {
     try {
-      const { data } = await axios.post(`${server}/course/forgot-password`, { courseEmail });
+      const { data } = await axios.post(`${server}/company/forgot-password`, { courseEmail });
       return data.message;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(
@@ -145,7 +145,7 @@ export const resetPassword = createAsyncThunk(
   "user/resetPassword",
   async (payload: ResetPasswordPayload, thunkAPI) => {
     try {
-      const { data } = await axios.post(`${server}/course/reset-password`, payload);
+      const { data } = await axios.post(`${server}/company/reset-password`, payload);
       return data.message;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(
@@ -169,7 +169,7 @@ export const editProfile = createAsyncThunk(
         },
       };
       const response = await axios.post(
-        `${server}/course/edit-profile`,
+        `${server}/company/edit-profile`,
         formData,
         config
       );
