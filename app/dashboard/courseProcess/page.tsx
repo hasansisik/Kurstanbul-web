@@ -37,7 +37,7 @@ export default function page() {
                   KURUM ADI
                 </span>
                 <span className="font-medium break-words block">
-                  ÖZEL AKTİF GÖRSEL MOTORLU TAŞIT SÜRÜCÜLERİ KURSU
+                  YILDIZ KURSU
                 </span>
               </div>
               <div className="flex-1 md:text-center">
@@ -45,14 +45,14 @@ export default function page() {
                   <Hash className="w-4 h-4" />
                   KURUM KODU
                 </span>
-                <span className="font-medium block">99943021</span>
+                <span className="font-medium block">9990001</span>
               </div>
               <div className="flex-1 md:text-right">
                 <span className="text-xs text-gray-500 flex items-center gap-2 md:justify-end">
                   <Phone className="w-4 h-4" />
                   KURUM TELEFON
                 </span>
-                <span className="font-medium block">2164501515</span>
+                <span className="font-medium block">21600000</span>
               </div>
             </div>
             <div className="flex flex-col md:flex-row gap-4 justify-between">
@@ -62,7 +62,7 @@ export default function page() {
                   KURUM ADRES
                 </span>
                 <span className="font-medium break-words block">
-                  KAYIŞDAĞI MAH. USLU CAD. NO: 29 İÇ KAPI NO: 1 ATAŞEHİR /
+                  X MAH. T CAD. NO: 3 İÇ KAPI NO: 11 ATAŞEHİR /
                   İSTANBUL
                 </span>
               </div>
@@ -71,14 +71,14 @@ export default function page() {
                   <Calendar className="w-4 h-4" />
                   AÇILMA TARİHİ
                 </span>
-                <span className="font-medium block">17/07/2006</span>
+                <span className="font-medium block">17/11/2012</span>
               </div>
               <div className="flex-1 md:text-right">
                 <span className="text-xs text-gray-500 flex items-center gap-2 md:justify-end">
                   <Users className="w-4 h-4" />
                   BİNA KONTEJYAN
                 </span>
-                <span className="font-medium block">54</span>
+                <span className="font-medium block">22</span>
               </div>
             </div>
           </div>
