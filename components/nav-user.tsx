@@ -1,5 +1,6 @@
 "use client"
 
+import { useRouter } from "next/navigation" // router yerine navigation kullanıyoruz
 import {
   BadgeCheck,
   Bell,
@@ -29,6 +30,9 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '@/redux/store'
+import { logout } from '@/redux/actions/companyActions'
 
 export function NavUser({
   user,
@@ -39,7 +43,12 @@ export function NavUser({
     avatar: string
   }
 }) {
+  const router = useRouter()
+  const dispatch = useDispatch<AppDispatch>()
   const { isMobile } = useSidebar()
+
+  const {company} = useSelector((state: RootState) => state.company);
+  const companyInitials = company.courseName?.slice(0, 2).toUpperCase() || 'KU'
 
   return (
     <SidebarMenu>
@@ -52,7 +61,7 @@ export function NavUser({
             >
               <Avatar className="h-8 w-8 rounded-lg">
                 <AvatarImage src={user.avatar} alt={user.name} />
-                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                <AvatarFallback className="rounded-lg">{companyInitials}</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">{user.name}</span>
@@ -71,7 +80,7 @@ export function NavUser({
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
                   <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                  <AvatarFallback className="rounded-lg">{companyInitials}</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">{user.name}</span>
@@ -98,7 +107,10 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={async () => {
+              router.push('/auth/login')
+              await dispatch(logout())
+            }}>
               <LogOut />
               Çıkış
             </DropdownMenuItem>

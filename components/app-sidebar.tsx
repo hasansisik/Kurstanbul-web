@@ -30,7 +30,6 @@ import { useEffect } from 'react'
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const dispatch = useDispatch<AppDispatch>();
   const company = useSelector((state: RootState) => state.company);
-  console.log("company1",company.company.courseName);
 
   useEffect(() => {
     dispatch(loadUser());

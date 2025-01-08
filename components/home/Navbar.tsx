@@ -1,8 +1,11 @@
-
+import { useSelector } from 'react-redux';
 import LogoImage from "../../public/icons/logo.svg";
 import MenuIcon from "../../public/icons/menu.svg";
+import {RootState } from '@/redux/store'
 
 export const Navbar = () => {
+  const company = useSelector((state: RootState) => state.company);
+
   return (
     <div className="bg-black">
       <div className="px-4">
@@ -37,7 +40,10 @@ export const Navbar = () => {
               </a>
               <button 
                 className="bg-white py-2 px-4 rounded-lg text-black"
-                onClick={() => window.location.href = '/auth/login'}
+                onClick={() => {
+                  const redirectPath = company ? '/dashboard' : '/auth/login';
+                  window.location.href = redirectPath;
+                }}
               >
                 Kurstanbul KOS
               </button>
