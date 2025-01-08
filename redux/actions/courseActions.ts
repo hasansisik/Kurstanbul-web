@@ -40,8 +40,8 @@ export const register = createAsyncThunk(
   async (payload: RegisterPayload, thunkAPI) => {
     try {
       const { data } = await axios.post(`${server}/company/register`, payload);
-      localStorage.setItem("accessToken", data.course.token);
-      return data.course;
+      localStorage.setItem("accessToken", data.company.token);
+      return data.company;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error.response.data.message);
     }
@@ -53,8 +53,8 @@ export const login = createAsyncThunk(
   async (payload: LoginPayload, thunkAPI) => {
     try {
       const { data } = await axios.post(`${server}/company/login`, payload);
-      localStorage.setItem("accessToken", data.course.token);
-      return data.course;
+      localStorage.setItem("accessToken", data.company.token);
+      return data.company;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error.response.data.message);
     }
@@ -71,7 +71,7 @@ export const loadUser = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       });
-      return data.course;
+      return data.company;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error.response.data.message);
     }

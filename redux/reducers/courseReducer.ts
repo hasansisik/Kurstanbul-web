@@ -135,7 +135,7 @@ export const courseReducer = createReducer(initialState, (builder) => {
     .addCase(editProfile.fulfilled, (state, action) => {
       state.loading = false;
       state.message = action.payload.message;
-      state.user = action.payload.course;
+      state.user = action.payload.company;
     })
     .addCase(editProfile.rejected, (state, action) => {
       state.loading = false;
