@@ -11,7 +11,7 @@ import { Plus } from "lucide-react";
 import Link from "next/link";
 
 const breadcrumbItems = [
-  { title: "Dashboard", link: "/dashboard" },
+  { title: "Anasayfa", link: "/dashboard" },
   { title: "Employee", link: "/dashboard/employee" },
 ];
 

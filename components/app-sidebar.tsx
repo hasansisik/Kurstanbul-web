@@ -28,7 +28,7 @@ import {
 // This is sample data.
 const data = {
   user: {
-    name: "shadcn",
+    name: "Aktif Görsel",
     email: "m@example.com",
     avatar: "/avatars/shadcn.jpg",
   },
@@ -47,120 +47,18 @@ const data = {
       isActive: true,
       items: [
         {
-          title: "Kursum",
-          url: "/dashboard/user",
-        },
-        {
-          title: "Personellerim",
-          url: "/dashboard/user",
-        },
-        {
-          title: "Değerlendirmelerim",
-          url: "/dashboard/user",
-        },
-        {
-          title:"Mevcut Ehliyet Sınıfları",
-          url:"/dashboard"
-        },
-        {
           title: "Uygulama Ders Kayıt",
-          url: "/dashboard/kanban",
-        },
-      ],
-    },
-    {
-      title: "Kurum İşlemleri",
-      url: "/dashboard/courseProcess",
-      icon: Home,
-      items: [
-        {
-          title: "Kurum Bilgisi",
-          url: "/dashboard/courseProcess",
-        },
-        {
-          title: "Kurum Araç",
-          url: "/dashboard/courseProcess",
-        },
-        {
-          title: "Kurum Derslik",
-          url: "/dashboard/courseProcess",
-        },
-        {
-          title: "Kurum Personelleri",
-          url: "/dashboard/courseProcess",
-        },
-
-      ],
-    },
-    {
-      title: "Kurum Aday Kayıt",
-      url: "/dashboard/employee",
-      icon: User,
-      items: [
-        {
-          title: "Aday Dönem Kayıt",
-          url: "/dashboard/employee",
-        },
-        {
-          title: "Aday Evrak Kayıt",
-          url: "/dashboard/employee",
-        },
-        {
-          title: "Aday Listeleme/Kontrol",
-          url: "/dashboard/employee",
-        },
-        {
-          title: "Aday Durum Görüntüleme",
-          url: "/dashboard/employee",
-        },
-      ],
-    },
-    {
-      title: "Ayarlar",
-      url: "/dashboard/settings",
-      icon: Settings2,
-      items: [
-        {
-          title: "Profil",
-          url: "/dashboard/settings",
-        },
-        {
-          title: "Hesap",
-          url: "/dashboard/settings/account",
-        },
-        {
-          title: "Görünüm",
-          url: "/dashboard/settings/appearance",
-        },
-        {
-          title: "Bildirimler",
-          url: "/dashboard/settings/notifications",
+          url: "/dashboard/mobile/class",
         },
       ],
     },
   ],
   projects: [
     {
-      name: "Aday Dönem Kayıt",
-      url: "/dashboard/profile",
-      icon: Map,
-    },
-    {
-      name: "MEBBİS Aktarım",
-      url: "/dashboard/profile",
+      name: "Uygulama Ders Kayıt",
+      url: "/dashboard/mobile/class",
       icon: Frame,
-    },
-    {
-      name: "Mağaza",
-      url: "/dashboard/profile",
-      icon: Store,
-    },
-    {
-      name: "Kurum Bilgisi",
-      url: "/dashboard/profile",
-      icon: Map,
-    },
-   
+    }, 
   ],
 }
 

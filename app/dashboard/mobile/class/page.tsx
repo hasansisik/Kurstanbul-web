@@ -20,6 +20,7 @@ import * as z from "zod";
 
 const breadcrumbItems = [
   { title: "Anasayfa", link: "/dashboard" },
+  { title: "Kanban", link: "/dashboard/kanban" },
 ];
 
 const formSchema = z.object({
@@ -66,7 +67,7 @@ export default function Page() {
         </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 py-10">
+            <div className="flex items-center space-x-2">
               {fields.map((field, index) => (
                 <FormField
                   control={form.control}
