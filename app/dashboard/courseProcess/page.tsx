@@ -27,7 +27,7 @@ export default function page() {
     <PageContainer>
       <div className="space-y-2">
         <Breadcrumbs items={breadcrumbItems} />
-        <div className="flex flex-col items-start justify-between bg-sidebar p-10 gap-4 border rounded-md border-slate-450">
+        <div className="flex flex-col items-start justify-between p-10 gap-4 border rounded-md border-slate-450">
           <Heading title={`99943021`} description="Kurum Bilgileri" />
           <div className="w-full flex flex-col gap-6">
             <div className="flex flex-col md:flex-row gap-4 justify-between">
