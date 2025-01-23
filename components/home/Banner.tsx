@@ -16,7 +16,7 @@ export function Banner() {
           ✨
           <span className="font-bold">
             {" "}
-            ⭐ Kurstanbul KOS ilk yıl ücretsiz!
+            ⭐ Kurstanbul KOS ilk ay ücretsiz!
           </span>{" "}
           <ChevronRight className="ml-1 size-4 transition-all duration-300 ease-out group-hover:translate-x-1" />
         </Link>

@@ -14,16 +14,31 @@ export const Footer = () => {
           </div>
           <ul className="flex justify-center gap-2.5">
             <li>
-              <XIcon />
+              <a
+                href="https://linkedin.com/company/kurstanbul"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <LinkedInIcon />
+              </a>
             </li>
             <li>
-              <LinkedInIcon />
+              <a
+                href="https://instagram.com/kurstanbul"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <InstaIcon />
+              </a>
             </li>
             <li>
-              <InstaIcon />
-            </li>
-            <li>
-              <YoutubeIcon />
+              <a
+                href="https://youtube.com/@kurstanbul"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <YoutubeIcon />
+              </a>
             </li>
           </ul>
         </div>

@@ -17,7 +17,7 @@ const opacity = useTransform(scrollYProgress, [0, 1], [.3,1]);
   return (
     <div className="bg-black text-white bg-gradient-to-b from-black to-[#5D2CA8] pt-[350px] pb-[72px] sm:py-24">
       <div className="container">
-        <h2 className="text-center text-5xl font-bold tracking-tighter">KOS Arayüz</h2>
+        <h2 className="text-center text-5xl font-bold tracking-tighter">KOS Mobil Uyumlu, Kullanıcı Dostu Yönetim Sistemi!</h2>
         <div className='max-w-xl mx-auto'>
         <p className="text-xl text-white/70 text-center mt-5 ">Kullanıcı dostu arayüzü sayesinde kurs yönetimi, personel takibi, değerlendirme raporları, ehliyet sınıfları, ders kayıtları ve kurum bilgileri gibi işlemleri tek bir yerden yönetmeyi sağlar. Ayrıca, aday kayıt, dönem bilgileri, evrak yönetimi ve durum takibi gibi detaylı süreçleri hızlı ve etkili bir şekilde gerçekleştirir.</p>
         </div>

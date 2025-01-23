@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import LogoImage from "../../public/icons/logo.svg";
+import Image from 'next/image';
 import MenuIcon from "../../public/icons/menu.svg";
 import {RootState } from '@/redux/store'
 
@@ -12,9 +12,15 @@ export const Navbar = () => {
         <div className="container bg-black">
           <div className="py-4 flex items-center justify-between">
             <div className="relative">
-              <div className="absolute w-full top-2 bottom-0 bg-[linear-gradient(to_right,#F7AABE,#B57CEC,#E472D1)] blur-md "></div>
+              <div className="absolute w-full top-2 bottom-0 "></div>
 
-              <LogoImage className="h-12 w-12 relative mt-1" />
+              <Image 
+                src="/images/logo2.png"
+                alt="Logo"
+                width={130}
+                height={40}
+                className="relative mt-1"
+              />
             </div>
             <div className="border border-white border-opacity-30 h-10 w-10 inline-flex justify-center items-center rounded-lg sm:hidden">
               <MenuIcon className="text-white" />

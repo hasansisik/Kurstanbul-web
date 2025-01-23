@@ -1,68 +1,96 @@
-"use client"
-import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+"use client";
+import React, { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 
 const logos = [
-  "https://firebasestorage.googleapis.com/v0/b/kurstanbul-22329.appspot.com/o/man.png?alt=media&token=bd04b298-e4fc-4266-82da-14e80e3da646",
-  "https://firebasestorage.googleapis.com/v0/b/kurstanbul-22329.appspot.com/o/KOS.png?alt=media&token=c079d104-e60f-4ac6-8abc-07cf77ca1498",
-  "https://firebasestorage.googleapis.com/v0/b/kurstanbul-22329.appspot.com/o/dealership.png?alt=media&token=e9595779-6403-4cf4-998c-614d101e5982"
+  "https://firebasestorage.googleapis.com/v0/b/kurstanbul-22329.appspot.com/o/person.png?alt=media&token=6229e4f3-7a3b-4a46-909c-f64b64260572",
+  "https://firebasestorage.googleapis.com/v0/b/kurstanbul-22329.appspot.com/o/logo.png?alt=media&token=42bc63f3-5198-4adf-bdf5-8e1963db44a8",
+  "https://firebasestorage.googleapis.com/v0/b/kurstanbul-22329.appspot.com/o/dealership.png?alt=media&token=e9595779-6403-4cf4-998c-614d101e5982",
 ];
 
-const lineWidth = 80; 
-const lineHeight = 2; 
+const lineWidth = 80;
+const lineHeight = 2;
 
 const LogoBeam = () => {
   return (
     <div className="flex items-center justify-center min-h-52">
       <div className="relative flex items-center">
         <div className="bg-[#000] border border-white/30  rounded-2xl flex items-center justify-center w-14 h-14 p-2">
-          <img src={logos[0]} alt="Logo 1" className="filter invert brightness-0" />
+          <img
+            src={logos[0]}
+            alt="Logo 1"
+            className="filter invert brightness-0"
+          />
         </div>
-        <div className="relative" style={{ width: `${lineWidth}px`, height: `${lineHeight}px`, backgroundColor: '#FFFFFF', overflow: 'hidden' }}>
+        <div
+          className="relative"
+          style={{
+            width: `${lineWidth}px`,
+            height: `${lineHeight}px`,
+            backgroundColor: "#FFFFFF",
+            overflow: "hidden",
+          }}
+        >
           <motion.div
             className="absolute top-0 left-0 h-full w-10 bg-gradient-to-r from-transparent via-black to-transparent opacity-75"
-            initial={{ x: '-40px' }}
+            initial={{ x: "-40px" }}
             animate={{ x: `calc(${lineWidth}px + 40px)` }}
             transition={{
               repeat: Infinity,
               duration: 0.5,
               repeatDelay: 2.5,
-              ease: 'linear',
+              ease: "linear",
             }}
-            style={{ willChange: 'transform' }}
+            style={{ willChange: "transform" }}
           />
         </div>
         <div className="relative bg-black border-2 border-white/70 rounded-2xl flex items-center justify-center w-16 h-16 p-2 overflow-hidden shadow-[0_0_15px_5px_#dbe0e2]">
-          <img src={logos[1]} alt="Logo 2" className="filter invert brightness-0" />
+          <img
+            src={logos[1]}
+            alt="Logo 2"
+            className="filter invert brightness-0"
+          />
           <motion.div
             className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-30"
-            initial={{ x: '-100%' }}
-            animate={{ x: '100%' }}
+            initial={{ x: "-100%" }}
+            animate={{ x: "100%" }}
             transition={{
               duration: 2,
-              ease: 'linear',
+              ease: "linear",
               repeat: Infinity,
-              repeatType: 'loop',
+              repeatType: "loop",
             }}
-            style={{ willChange: 'transform' }}
+            style={{ willChange: "transform" }}
           />
         </div>
-        <div className="relative" style={{ width: `${lineWidth}px`, height: `${lineHeight}px`, backgroundColor: '#FFFFFF', overflow: 'hidden' }}>
+        <div
+          className="relative"
+          style={{
+            width: `${lineWidth}px`,
+            height: `${lineHeight}px`,
+            backgroundColor: "#FFFFFF",
+            overflow: "hidden",
+          }}
+        >
           <motion.div
             className="absolute top-0 right-0 h-full w-10 bg-gradient-to-r from-transparent via-black to-transparent opacity-75"
-            initial={{ x: '40px' }}
+            initial={{ x: "40px" }}
             animate={{ x: `calc(-${lineWidth}px - 40px)` }}
             transition={{
               repeat: Infinity,
               duration: 0.5,
               repeatDelay: 3.5,
-              ease: 'linear',
+              ease: "linear",
             }}
-            style={{ willChange: 'transform' }}
+            style={{ willChange: "transform" }}
           />
         </div>
         <div className="bg-black border border-white/30 rounded-2xl flex items-center justify-center w-14 h-14 p-2">
-          <img src={logos[2]} alt="Logo 3" className="filter invert brightness-0" />
+          <img
+            src={logos[2]}
+            alt="Logo 3"
+            className="filter invert brightness-0"
+          />
         </div>
       </div>
     </div>
@@ -89,21 +117,21 @@ const CardWithEffect = ({ children }: { children: React.ReactNode }) => {
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      style={{ willChange: 'transform' }}
+      style={{ willChange: "transform" }}
     >
       {isHovered && (
         <div
           className="pointer-events-none absolute rounded-full"
           style={{
-            width: '300px',
-            height: '300px',
+            width: "300px",
+            height: "300px",
             top: mousePosition.y - 150,
             left: mousePosition.x - 150,
-            background: '#5D2CA8',
-            filter: 'blur(100px)',
-            transform: 'translate(-0%, -0%)',
+            background: "#5D2CA8",
+            filter: "blur(100px)",
+            transform: "translate(-0%, -0%)",
             zIndex: 10, // Ensure the effect is on top
-            willChange: 'transform, top, left',
+            willChange: "transform, top, left",
           }}
         />
       )}
@@ -113,62 +141,77 @@ const CardWithEffect = ({ children }: { children: React.ReactNode }) => {
 };
 
 const AWSIcon = () => {
-  
-
   return (
     <div className="flex flex-col justify-center h-full items-center relative">
-         <div className="flex flex-row gap-8 justify-center h-full items-center relative">
-         <div className="relative bg-black border-2 border-white/70 rounded-2xl flex items-center justify-center w-16 h-16 p-4 overflow-hidden shadow-[0_0_15px_5px_#dbe0e2]">
-          <img src={logos[0]} alt="Logo 2" className="filter invert brightness-0" />
+      <div className="flex flex-row gap-8 justify-center h-full items-center relative">
+        <div className="relative bg-black border-2 border-white/70 rounded-2xl flex items-center justify-center w-16 h-16 p-4 overflow-hidden shadow-[0_0_15px_5px_#dbe0e2]">
+          <img
+            src={logos[0]}
+            alt="Logo 2"
+            className="filter invert brightness-0"
+          />
           <motion.div
             className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-30"
-            initial={{ x: '-100%' }}
-            animate={{ x: '100%' }}
+            initial={{ x: "-100%" }}
+            animate={{ x: "100%" }}
             transition={{
               duration: 2,
-              ease: 'linear',
+              ease: "linear",
               repeat: Infinity,
-              repeatType: 'loop',
+              repeatType: "loop",
             }}
-            style={{ willChange: 'transform' }}
+            style={{ willChange: "transform" }}
           />
         </div>
         <div className="relative bg-black border-2 border-white/70 rounded-2xl flex items-center justify-center w-16 h-16 p-4 overflow-hidden shadow-[0_0_15px_5px_#dbe0e2]">
-          <img src={logos[1]} alt="Logo 2" className="filter invert brightness-0" />
+          <img
+            src={logos[1]}
+            alt="Logo 2"
+            className="filter invert brightness-0"
+          />
           <motion.div
             className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-30"
-            initial={{ x: '-100%' }}
-            animate={{ x: '100%' }}
+            initial={{ x: "-100%" }}
+            animate={{ x: "100%" }}
             transition={{
               duration: 2,
-              ease: 'linear',
+              ease: "linear",
               repeat: Infinity,
-              repeatType: 'loop',
+              repeatType: "loop",
             }}
-            style={{ willChange: 'transform' }}
+            style={{ willChange: "transform" }}
           />
         </div>
         <div className="relative bg-black border-2 border-white/70 rounded-2xl flex items-center justify-center w-16 h-16 p-4 overflow-hidden shadow-[0_0_15px_5px_#dbe0e2]">
-          <img src={logos[2]} alt="Logo 2" className="filter invert brightness-0" />
+          <img
+            src={logos[2]}
+            alt="Logo 2"
+            className="filter invert brightness-0"
+          />
           <motion.div
             className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-30"
-            initial={{ x: '-100%' }}
-            animate={{ x: '100%' }}
+            initial={{ x: "-100%" }}
+            animate={{ x: "100%" }}
             transition={{
               duration: 2,
-              ease: 'linear',
+              ease: "linear",
               repeat: Infinity,
-              repeatType: 'loop',
+              repeatType: "loop",
             }}
-            style={{ willChange: 'transform' }}
+            style={{ willChange: "transform" }}
           />
         </div>
-        </div>
+      </div>
 
-      
       <div className="text-left p-6 mt-4">
-        <h1 className="text-white text-2xl font-bold mb-2">Kurslarınız İçin Yeni Bir Başlangıç</h1>
-        <p className="text-gray-400 text-lg">Kurstanbul sayesinde eğitimlerinizi profesyonel bir şekilde sunabilir ve kursiyerlerinizi artırabilirsiniz. Platformumuz, eğitiminizi daha erişilebilir kılar.</p>
+        <h1 className="text-white text-2xl font-bold mb-2">
+          Evrak Yükünden Kurtulun!
+        </h1>
+        <p className="text-gray-400 text-lg">
+          Kurstanbul, sürücü kurslarının evrak karmaşasını ortadan kaldırarak
+          tüm süreçleri dijitalleştirir. Hem kurs yönetiminde hem de öğrenci
+          iletişiminde hızlı, pratik ve modern çözümler sunuyoruz.
+        </p>
       </div>
     </div>
   );
@@ -181,7 +224,7 @@ const BentoBox1 = () => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setIsChartVisible(true);
             observer.unobserve(entry.target);
@@ -217,8 +260,15 @@ const BentoBox1 = () => {
                   <span className="ml-2 text-white/70 text-sm">Kursiyer</span>
                 </div>
               </div>
-              <div ref={chartRef} className="relative w-full mt-12" style={{ height: chartHeight }}>
-                <svg viewBox={`0 0 ${chartWidth} ${chartHeight}`} className="w-full h-full pl-11">
+              <div
+                ref={chartRef}
+                className="relative w-full mt-12"
+                style={{ height: chartHeight }}
+              >
+                <svg
+                  viewBox={`0 0 ${chartWidth} ${chartHeight}`}
+                  className="w-full h-full pl-11"
+                >
                   <defs>
                     <linearGradient id="gradient" x1="0" x2="0" y1="0" y2="1">
                       <stop offset="0%" stopColor="#5D2CA8" />
@@ -228,12 +278,18 @@ const BentoBox1 = () => {
                   <polyline
                     fill="url(#gradient)"
                     stroke="none"
-                    points={`${(0 / (data.length - 1)) * chartWidth},${chartHeight} ${data
+                    points={`${
+                      (0 / (data.length - 1)) * chartWidth
+                    },${chartHeight} ${data
                       .map(
                         (value, index) =>
-                          `${(index / (data.length - 1)) * chartWidth},${chartHeight - (value / maxData) * chartHeight}`
+                          `${(index / (data.length - 1)) * chartWidth},${
+                            chartHeight - (value / maxData) * chartHeight
+                          }`
                       )
-                      .join(' ')} ${(data.length - 1) * (chartWidth / (data.length - 1))},${chartHeight}`}
+                      .join(" ")} ${
+                      (data.length - 1) * (chartWidth / (data.length - 1))
+                    },${chartHeight}`}
                   />
                   <motion.polyline
                     fill="none"
@@ -243,12 +299,14 @@ const BentoBox1 = () => {
                     points={data
                       .map(
                         (value, index) =>
-                          `${(index / (data.length - 1)) * chartWidth},${chartHeight - (value / maxData) * chartHeight}`
+                          `${(index / (data.length - 1)) * chartWidth},${
+                            chartHeight - (value / maxData) * chartHeight
+                          }`
                       )
-                      .join(' ')}
+                      .join(" ")}
                     initial={{ pathLength: 0 }}
                     animate={{ pathLength: isChartVisible ? 1 : 0 }}
-                    transition={{ duration: 1.5, ease: 'easeInOut' }}
+                    transition={{ duration: 1.5, ease: "easeInOut" }}
                   />
                 </svg>
                 <div className="absolute top-0 left-0 h-full w-full pointer-events-none">
@@ -266,8 +324,14 @@ const BentoBox1 = () => {
               </div>
             </div>
             <div className="text-left p-6 mt-4">
-              <h1 className="text-white text-2xl font-bold mb-2">Eğitimde Yeni Dönem: Kurstanbul ile Daha Fazla Kursiyer</h1>
-              <p className="text-white/70 text-lg">Eğitimlerinizi dijital ortamda etkili bir şekilde tanıtmanıza olanak tanır. Modern araçlarımızla kurslarınız daha görünür hale gelir, daha fazla kursiyere ulaşarak büyüme sağlar.</p>
+              <h1 className="text-white text-2xl font-bold mb-2">
+                Eğitimde Yeni Dönem: Kurstanbul ile Daha Fazla Kursiyer
+              </h1>
+              <p className="text-white/70 text-lg">
+                Eğitimlerinizi dijital ortamda etkili bir şekilde tanıtmanıza
+                olanak tanır. Modern araçlarımızla kurslarınız daha görünür hale
+                gelir, daha fazla kursiyere ulaşarak büyüme sağlar.
+              </p>
             </div>
           </div>
         </CardWithEffect>
@@ -276,8 +340,14 @@ const BentoBox1 = () => {
             <div className="flex flex-col justify-center h-full">
               <LogoBeam />
               <div className="text-left p-6">
-                <h1 className="text-white text-2xl font-bold mb-2">Sürücü Kursu ve Kursiyer Arasındaki Köprü</h1>
-                <p className="text-white/70 text-lg">Kurstanbul, sürücü kurslarıyla kursiyerleri bir araya getiren güçlü bir bağ kurar. Doğru kitleye ulaşarak kursiyerlerinizi artırabilir, eğitimlerinizi kolayca yönetebilirsiniz.</p>
+                <h1 className="text-white text-2xl font-bold mb-2">
+                  Sürücü Kursu ve Kursiyer Arasındaki Köprü
+                </h1>
+                <p className="text-white/70 text-lg">
+                  Kurstanbul, sürücü kurslarıyla kursiyerleri bir araya getiren
+                  güçlü bir bağ kurar. Doğru kitleye ulaşarak kursiyerlerinizi
+                  artırabilir, eğitimlerinizi kolayca yönetebilirsiniz.
+                </p>
               </div>
             </div>
           </CardWithEffect>
@@ -290,7 +360,6 @@ const BentoBox1 = () => {
   );
 };
 
-
 function Bentodemo() {
   return (
     <div className="h-screen flex items-center justify-center  ">
@@ -300,4 +369,3 @@ function Bentodemo() {
 }
 
 export default Bentodemo;
-          
