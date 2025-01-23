@@ -89,11 +89,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           },
           {
             title: "Kurum Araç",
-            url: "/dashboard/soon",
+            url: "/dashboard/courseProcess/car",
           },
           {
             title: "Kurum Derslik",
-            url: "/dashboard/soon",
+            url: "/dashboard/courseProcess/class",
           },
           {
             title: "Kurum Personelleri",

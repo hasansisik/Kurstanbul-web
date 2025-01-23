@@ -1,30 +1,15 @@
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import PageContainer from "@/components/layout/page-container";
-import { columns } from "@/components/tables/employee-tables/columns";
-import { EmployeeTable } from "@/components/tables/employee-tables/employee-table";
-import { buttonVariants, Button } from "@/components/ui/button";
+import { columns } from "@/components/tables/car-tables/columns";
+import { CarTable } from "@/components/tables/car-tables/car-table";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
-import { Employee } from "@/constants/data";
-import { cn } from "@/lib/utils";
-import { Plus } from "lucide-react";
-import Link from "next/link";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Car } from "@/constants/data";
 import { AddCarSheet } from "@/components/sheets/add-car-sheet";
 
 const breadcrumbItems = [
   { title: "Anasayfa", link: "/dashboard" },
-  { title: "Employee", link: "/dashboard/employee" },
+  { title: "Kurum Araç", link: "/dashboard/courseProcess/car" },
 ];
 
 type paramsProps = {
@@ -36,36 +21,60 @@ type paramsProps = {
 export default async function page({ searchParams }: paramsProps) {
   const page = Number(searchParams.page) || 1;
   const pageLimit = Number(searchParams.limit) || 10;
-  const country = searchParams.search || null;
   const offset = (page - 1) * pageLimit;
 
-  const res = await fetch(
-    `https://api.slingacademy.com/v1/sample-data/users?offset=${offset}&limit=${pageLimit}` +
-      (country ? `&search=${country}` : "")
-  );
-  const employeeRes = await res.json();
-  const totalUsers = employeeRes.total_users; //1000
-  const pageCount = Math.ceil(totalUsers / pageLimit);
-  const employee: Employee[] = employeeRes.users;
+  // Örnek araç verileri
+  const carData: Car[] = [
+    {
+      id: 1,
+      carPlate: '34 ABC 123',
+      licenseClass: 'B',
+      carBrand: 'Toyota Corolla',
+      registerDate: '2022-01-15',
+      serviceDate: '2022-02-01',
+      inspectionDate: '2024-01-15',
+      gear: 'Otomatik',
+      carStatus: 'Aktif'
+    },
+    {
+      id: 2,
+      carPlate: '34 XYZ 789',
+      licenseClass: 'B',
+      carBrand: 'Honda Civic',
+      registerDate: '2021-11-20',
+      serviceDate: '2021-12-01',
+      inspectionDate: '2023-11-20',
+      gear: 'Manuel',
+      carStatus: 'Bakımda'
+    },
+    // Daha fazla örnek veri eklenebilir
+  ];
+
+  const totalCars = carData.length;
+  const pageCount = Math.ceil(totalCars / pageLimit);
+  
+  // Sayfalama için veriyi dilimle
+  const paginatedData = carData.slice(offset, offset + pageLimit);
+
   return (
     <PageContainer>
       <div className="space-y-4">
         <Breadcrumbs items={breadcrumbItems} />
         <div className="flex items-start justify-between">
           <Heading
-            title={`Kurum Araç Listesi (${totalUsers})`}
+            title={`Kurum Araç Listesi (${totalCars})`}
             description="Kurumunuza ait araç listesi"
           />
           <AddCarSheet />
         </div>
         <Separator />
 
-        <EmployeeTable
-          searchKey="country"
+        <CarTable
+          searchKey="carPlate"
           pageNo={page}
           columns={columns}
-          totalUsers={totalUsers}
-          data={employee}
+          totalUsers={totalCars}
+          data={paginatedData}
           pageCount={pageCount}
         />
       </div>

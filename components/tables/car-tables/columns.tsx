@@ -1,10 +1,10 @@
 'use client';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Employee } from '@/constants/data';
+import { Car } from '@/constants/data';
 import { ColumnDef } from '@tanstack/react-table';
 import { CellAction } from './cell-action';
 
-export const columns: ColumnDef<Employee>[] = [
+export const columns: ColumnDef<Car, any>[] = [
   {
     id: 'select',
     header: ({ table }) => (
@@ -25,24 +25,36 @@ export const columns: ColumnDef<Employee>[] = [
     enableHiding: false
   },
   {
-    accessorKey: 'first_name',
-    header: 'NAME'
+    accessorKey: 'carPlate',
+    header: 'Araç Plakası'
   },
   {
-    accessorKey: 'country',
-    header: 'COUNTRY'
+    accessorKey: 'licenseClass',
+    header: 'Ehliyet Sınıfı'
   },
   {
-    accessorKey: 'email',
-    header: 'EMAIL'
+    accessorKey: 'carBrand',
+    header: 'Markası'
   },
   {
-    accessorKey: 'job',
-    header: 'COMPANY'
+    accessorKey: 'registerDate',
+    header: 'Tescil Tarihi'
   },
   {
-    accessorKey: 'gender',
-    header: 'GENDER'
+    accessorKey: 'serviceDate',
+    header: 'Hizmete Giriş Tarihi'
+  },
+  {
+    accessorKey: 'inspectionDate',
+    header: 'Muayene Geçerlilik Tarihi'
+  },
+  {
+    accessorKey: 'gear',
+    header: 'Şanzıman'
+  },
+  {
+    accessorKey: 'carStatus',
+    header: 'Araç Durumu'
   },
   {
     id: 'actions',

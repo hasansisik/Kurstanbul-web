@@ -1,7 +1,7 @@
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import PageContainer from "@/components/layout/page-container";
-import { columns } from "@/components/tables/employee-tables/columns";
-import { EmployeeTable } from "@/components/tables/employee-tables/employee-table";
+import { columns } from "@/components/tables/car-tables/columns";
+import { EmployeeTable } from "@/components/tables/car-tables/car-table";
 import { buttonVariants } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
