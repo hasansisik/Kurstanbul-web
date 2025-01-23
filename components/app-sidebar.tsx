@@ -26,10 +26,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/redux/store'
 import { loadUser } from '@/redux/actions/companyActions'
 import { useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const dispatch = useDispatch<AppDispatch>();
   const company = useSelector((state: RootState) => state.company);
+  const pathname = usePathname();
 
   useEffect(() => {
     dispatch(loadUser());
@@ -54,7 +56,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         title: "Kurstanbul Mobil",
         url: "/dashboard/soon",
         icon: Smartphone,
-        isActive: true,
+        isActive: pathname.startsWith('/dashboard/mobile'),
         items: [
           {
             title: "Kursum",
@@ -82,6 +84,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         title: "Kurum İşlemleri",
         url: "/dashboard/courseProcess",
         icon: Home,
+        isActive: pathname.startsWith('/dashboard/courseProcess'),
         items: [
           {
             title: "Kurum Bilgisi",
@@ -97,7 +100,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           },
           {
             title: "Kurum Personelleri",
-            url: "/dashboard/soon",
+            url: "/dashboard/courseProcess/person",
           },
 
         ],
@@ -106,6 +109,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         title: "Kurum Aday Kayıt",
         url: "/dashboard/soon",
         icon: User,
+        isActive: pathname.startsWith('/dashboard/candidate'),
         items: [
           {
             title: "Aday Dönem Kayıt",
@@ -129,6 +133,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         title: "Ayarlar",
         url: "/dashboard/settings",
         icon: Settings2,
+        isActive: pathname.startsWith('/dashboard/settings'),
         items: [
           {
             title: "Profil",

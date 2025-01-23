@@ -141,3 +141,22 @@ export type Car = {
   gear: string;
   carStatus: string;
 }
+
+
+export type Class = {
+  id: number;
+  classType: string;
+  className: string;
+  roomQuata: string;
+  registerDate: string;
+  classStatus: string;
+}
+
+export type Person = {
+  id: number;
+  personName: string;
+  personAge: string;
+  experienceYear: string;
+  licanceClass: string;
+  personStatus: string;
+}
