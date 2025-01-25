@@ -9,7 +9,7 @@ import { columns } from "@/components/tables/person-tables/columns";
 
 const breadcrumbItems = [
   { title: "Anasayfa", link: "/dashboard" },
-  { title: "Kurum Araç", link: "/dashboard/courseProcess/car" },
+  { title: "Kurum Araç", link: "/dashboard/organization/car" },
 ];
 
 type paramsProps = {

@@ -9,7 +9,7 @@ import { AddCarSheet } from "@/components/sheets/add-car-sheet";
 
 const breadcrumbItems = [
   { title: "Anasayfa", link: "/dashboard" },
-  { title: "Kurum Araç", link: "/dashboard/courseProcess/car" },
+  { title: "Kurum Araç", link: "/dashboard/organization/car" },
 ];
 
 type paramsProps = {

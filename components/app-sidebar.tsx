@@ -82,25 +82,25 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       },
       {
         title: "Kurum İşlemleri",
-        url: "/dashboard/courseProcess",
+        url: "/dashboard/organization",
         icon: Home,
-        isActive: pathname.startsWith('/dashboard/courseProcess'),
+        isActive: pathname.startsWith('/dashboard/organization'),
         items: [
           {
             title: "Kurum Bilgisi",
-            url: "/dashboard/courseProcess",
+            url: "/dashboard/organization",
           },
           {
             title: "Kurum Araç",
-            url: "/dashboard/courseProcess/car",
+            url: "/dashboard/organization/car",
           },
           {
             title: "Kurum Derslik",
-            url: "/dashboard/courseProcess/class",
+            url: "/dashboard/organization/class",
           },
           {
             title: "Kurum Personelleri",
-            url: "/dashboard/courseProcess/person",
+            url: "/dashboard/organization/person",
           },
 
         ],
@@ -113,19 +113,19 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         items: [
           {
             title: "Aday Dönem Kayıt",
-            url: "/dashboard/soon",
+            url: "/dashboard/candidate",
           },
           {
             title: "Aday Evrak Kayıt",
-            url: "/dashboard/soon",
+            url: "/dashboard/candidate",
           },
           {
             title: "Aday Listeleme/Kontrol",
-            url: "/dashboard/soon",
+            url: "/dashboard/candidate",
           },
           {
             title: "Aday Durum Görüntüleme",
-            url: "/dashboard/soon",
+            url: "/dashboard/candidate",
           },
         ],
       },
