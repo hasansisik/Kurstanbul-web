@@ -7,7 +7,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Kurstanbul KOS',
-  description: 'Sürücü Kursu Otamasyon Sistemi
+  description: 'Sürücü Kursu Otamasyon Sistemi'
 };
 
 export default function DashboardLayout({
