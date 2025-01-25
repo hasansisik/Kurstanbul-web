@@ -6,8 +6,8 @@ import {
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'kurstanbul Dashboard',
-  description: 'Basic dashboard with Next.js and Shadcn'
+  title: 'Kurstanbul KOS',
+  description: 'Sürücü Kursu Otamasyon Sistemi
 };
 
 export default function DashboardLayout({
